@@ -1,0 +1,292 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   The Munro Centre — Design System
+   Editorial · warm · premium · minimal. Aesop × Airbnb × high-end school.
+   ========================================================================== */
+
+@theme {
+  /* ---- Brand palette ---------------------------------------------------- */
+  --color-navy: #11253f;
+  --color-navy-700: #182f4d;
+  --color-navy-600: #1b3354;
+  --color-navy-500: #284a6e;
+  --color-navy-400: #3a5572;
+  --color-navy-300: #6981a0;
+
+  --color-sand: #f6f2eb;
+  --color-sand-200: #efe9dd;
+  --color-sand-300: #e7dece;
+  --color-cream: #fafaf8;
+  --color-paper: #fefdfb; /* exact background white of the logo artwork */
+
+  --color-sage: #a8c29a;
+  --color-sage-600: #8aa97b;
+  --color-sage-700: #5f7a52; /* AA-compliant sage for text on light surfaces */
+  --color-sage-200: #d9e5d2;
+  --color-sage-100: #e9f0e4;
+
+  --color-terracotta: #d48b6a;
+  --color-terracotta-600: #c2734f;
+  --color-terracotta-700: #a3502c; /* AA-compliant terracotta for text/labels */
+  --color-terracotta-200: #f0dbcf;
+  --color-terracotta-100: #f7e9e1;
+
+  --color-ink: #444444;
+  --color-ink-soft: #66625b; /* AA on cream/sand */
+  --color-ink-faint: #6b665d; /* AA-compliant; was too light for text */
+
+  /* ---- Official brand palette (from the logo) -------------------------- */
+  --color-brand-red: #e5342b;
+  --color-brand-blue: #28a9e0;
+  --color-brand-yellow: #f5c231;
+  --color-brand-green: #6fb43f;
+  --color-brand-green-deep: #4f8f2c; /* AA-compliant green for small text */
+
+  /* ---- Typography ------------------------------------------------------- */
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* ---- Radii ------------------------------------------------------------ */
+  --radius: 24px;
+  --radius-lg: 32px;
+  --radius-sm: 14px;
+  --radius-pill: 999px;
+
+  /* ---- Shadows (soft, expensive) --------------------------------------- */
+  --shadow-soft: 0 2px 8px -2px rgb(17 37 63 / 0.06), 0 12px 32px -8px rgb(17 37 63 / 0.08);
+  --shadow-lift: 0 4px 14px -4px rgb(17 37 63 / 0.10), 0 24px 60px -16px rgb(17 37 63 / 0.16);
+  --shadow-hero: 0 40px 120px -30px rgb(17 37 63 / 0.45);
+
+  /* ---- Motion ----------------------------------------------------------- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-gentle: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ---- Editorial container --------------------------------------------- */
+  --spacing-section: clamp(5rem, 11vw, 10rem);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: color-mix(in oklab, var(--color-navy) 12%, transparent);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* Per-section scroll-mt-24 handles the sticky-nav offset (no stacking). */
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.005em;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    color: var(--color-navy);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-terracotta);
+    color: var(--color-cream);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-terracotta);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Refined scrollbar (desktop) */
+  @media (pointer: fine) {
+    ::-webkit-scrollbar {
+      width: 11px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--color-sand);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: color-mix(in oklab, var(--color-navy) 25%, var(--color-sand));
+      border: 3px solid var(--color-sand);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: color-mix(in oklab, var(--color-navy) 45%, var(--color-sand));
+    }
+  }
+}
+
+/* ==========================================================================
+   Utilities & components
+   ========================================================================== */
+@layer utilities {
+  /* Editorial measure */
+  .measure {
+    max-width: 38ch;
+  }
+  .measure-wide {
+    max-width: 62ch;
+  }
+
+  /* Eyebrow / kicker label */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* Fine top hairline used to separate editorial blocks */
+  .rule {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      color-mix(in oklab, var(--color-navy) 18%, transparent),
+      transparent
+    );
+  }
+
+  /* Subtle film-grain atmosphere for dark sections */
+  .grain {
+    position: relative;
+    isolation: isolate;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Image hover zoom wrapper */
+  .img-zoom {
+    overflow: hidden;
+  }
+  .img-zoom img {
+    transition: transform 0.9s var(--ease-out-expo);
+    will-change: transform;
+  }
+  .img-zoom:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Underline-on-hover link */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.45s var(--ease-out-expo);
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+}
+
+/* ==========================================================================
+   Keyframes (used by signature moments)
+   ========================================================================== */
+@keyframes munro-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes munro-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes munro-acc-down {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+@keyframes munro-acc-up {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+
+.acc-content[data-state="open"] {
+  animation: munro-acc-down 0.45s var(--ease-out-expo);
+}
+.acc-content[data-state="closed"] {
+  animation: munro-acc-up 0.35s var(--ease-out-expo);
+}
+
+@keyframes munro-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes munro-fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes munro-zoom-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes munro-zoom-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.96); }
+}
+
+.dialog-overlay[data-state="open"] { animation: munro-fade-in 0.3s ease; }
+.dialog-overlay[data-state="closed"] { animation: munro-fade-out 0.25s ease; }
+.dialog-content[data-state="open"] { animation: munro-zoom-in 0.4s var(--ease-out-expo); }
+.dialog-content[data-state="closed"] { animation: munro-zoom-out 0.25s var(--ease-out-expo); }
+
+@keyframes munro-sheet-down {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+@keyframes munro-sheet-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
+}
+.sheet-content[data-state="open"] { animation: munro-sheet-down 0.45s var(--ease-out-expo); }
+.sheet-content[data-state="closed"] { animation: munro-sheet-up 0.3s var(--ease-out-expo); }
+
+.animate-float {
+  animation: munro-float 7s ease-in-out infinite;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: munro-marquee 60s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .marquee-track {
+    animation: none !important;
+  }
+}
