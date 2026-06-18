@@ -58,7 +58,7 @@ export function Hero() {
 
             {/* H1 — LCP element, rendered statically (Baloo, navy). The final
                 word gets a playful hand-drawn squiggle underline. */}
-            <h1 className="mt-6 font-display text-[clamp(2.75rem,5.6vw,4.75rem)] font-bold leading-[1.06] text-navy">
+            <h1 className="mt-6 font-display text-[clamp(2.5rem,7vw,4.75rem)] font-bold leading-[1.06] text-navy">
               {lines.map((line, li) => {
                 const isLast = li === lines.length - 1;
                 if (!isLast) {
@@ -90,10 +90,10 @@ export function Hero() {
               delay={0.45}
               className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
-              <Button asChild size="xl" variant="brand">
+              <Button asChild size="xl" variant="brand" className="w-full sm:w-auto">
                 <a href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
               </Button>
-              <Button asChild size="xl" variant="secondary">
+              <Button asChild size="xl" variant="secondary" className="w-full sm:w-auto">
                 <a href={hero.secondaryCta.href}>
                   <Phone className="size-4" strokeWidth={1.9} />
                   {hero.secondaryCta.label}
@@ -117,7 +117,7 @@ export function Hero() {
 
           {/* Image collage */}
           <div className="relative">
-            <Reveal className="img-zoom relative ml-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2rem] bg-sand shadow-hero lg:max-w-none">
+            <Reveal className="img-zoom relative mx-auto aspect-[5/4] w-full max-w-md overflow-hidden rounded-[1.75rem] bg-sand shadow-hero sm:aspect-[4/5] lg:ml-auto lg:max-w-none lg:rounded-[2rem]">
               <Image
                 src={image.src}
                 alt={image.alt}
@@ -155,6 +155,18 @@ export function Hero() {
                 <span className="block text-xs font-medium text-ink-soft">
                   Community-owned in St Lucia
                 </span>
+              </span>
+            </Reveal>
+
+            {/* Mobile-only trust pill — keeps the image area polished on phones,
+                where the overlapping collage cards are hidden. */}
+            <Reveal
+              delay={0.4}
+              className="mt-4 flex justify-center sm:hidden"
+            >
+              <span className="inline-flex items-center gap-2 rounded-pill bg-cream px-4 py-2 text-sm font-medium text-navy shadow-soft ring-1 ring-navy/5">
+                <Sparkles className="size-4 text-brand-green-deep" strokeWidth={1.9} />
+                Community-owned since 1981
               </span>
             </Reveal>
           </div>
