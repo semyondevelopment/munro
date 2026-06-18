@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef } from "react";
+import { useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { EASE_OUT_EXPO } from "@/lib/motion";
 
 type RevealProps = {
   children: React.ReactNode;
@@ -15,30 +15,70 @@ type RevealProps = {
   as?: "div" | "li" | "span";
 };
 
+const EASING = "cubic-bezier(0.16,1,0.3,1)";
+
 export function Reveal({
   children,
   className,
   delay = 0,
   y = 26,
-  as = "div",
+  as: Tag = "div",
 }: RevealProps) {
+  const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
-  const MotionTag = motion[as];
 
-  if (reduce) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || reduce) return;
+
+    const transition = `opacity 0.85s ${EASING} ${delay}s, transform 0.85s ${EASING} ${delay}s`;
+
+    const show = () => {
+      el.style.transition = transition;
+      // One frame lets the browser register the transition before value changes.
+      requestAnimationFrame(() => {
+        el.style.opacity = "1";
+        el.style.transform = "none";
+      });
+    };
+
+    // If the element is already above the fold, reveal it immediately in the
+    // same JS task so the browser never paints an invisible state.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.88) {
+      el.style.opacity = "0";
+      el.style.transform = `translateY(${y}px)`;
+      // Defer one frame so the browser registers the starting state before
+      // applying the transition — gives us the CSS animation without a flash.
+      requestAnimationFrame(() => {
+        el.style.transition = transition;
+        requestAnimationFrame(show);
+      });
+      return;
+    }
+
+    // Below the fold — hide it now (user can't see it) and watch for entry.
+    el.style.opacity = "0";
+    el.style.transform = `translateY(${y}px)`;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          show();
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [delay, reduce, y]);
 
   return (
-    <MotionTag
-      className={cn(className)}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -12% 0px" }}
-      transition={{ duration: 0.85, delay, ease: EASE_OUT_EXPO }}
-    >
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    <Tag ref={ref as any} className={cn(className)}>
       {children}
-    </MotionTag>
+    </Tag>
   );
 }
