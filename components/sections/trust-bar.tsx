@@ -2,6 +2,7 @@ import { Container } from "@/components/primitives/container";
 import { Reveal } from "@/components/primitives/reveal";
 import { trustBar } from "@/lib/content";
 import { iconMap } from "@/components/icon-map";
+import { brandTile } from "@/lib/palette";
 
 export function TrustBar() {
   return (
@@ -19,10 +20,14 @@ export function TrustBar() {
                 key={item.label}
                 delay={(i % 6) * 0.06}
                 y={16}
-                className="flex flex-col items-center gap-2 text-center lg:border-l lg:border-navy/10 lg:px-5 lg:first:border-l-0"
+                className="flex flex-col items-center gap-2 text-center lg:px-5"
               >
                 {Icon && (
-                  <Icon className="size-6 text-sage-700" strokeWidth={1.5} />
+                  <span
+                    className={`inline-flex size-12 items-center justify-center rounded-2xl ${brandTile(i)}`}
+                  >
+                    <Icon className="size-6" strokeWidth={1.8} />
+                  </span>
                 )}
                 <span className="mt-1 font-display text-xl leading-none text-navy">
                   {item.label}

@@ -9,11 +9,11 @@ import { meals } from "@/lib/content";
 export function Meals() {
   return (
     <section id="meals" className="relative overflow-hidden scroll-mt-24 bg-cream py-section">
-      <Atmosphere tone="sage" flip />
+      <Atmosphere tone="green" flip />
       <Container className="relative">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <Eyebrow>{meals.eyebrow}</Eyebrow>
+            <Eyebrow color="green">{meals.eyebrow}</Eyebrow>
             <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.04]">
               {meals.title}
             </h2>
@@ -25,7 +25,7 @@ export function Meals() {
                 <li key={point} className="flex items-start gap-3">
                   <span
                     aria-hidden
-                    className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-sage-600 text-cream"
+                    className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-green-deep text-cream"
                   >
                     <Check className="size-3.5" strokeWidth={2.5} />
                   </span>
@@ -51,8 +51,8 @@ export function Meals() {
               </div>
             ) : (
               <div className="flex aspect-[3/4] flex-col items-center justify-center rounded-[var(--radius-lg)] border border-navy/10 bg-sand p-10 text-center shadow-soft">
-                <span className="inline-flex size-16 items-center justify-center rounded-pill bg-terracotta-100 text-terracotta-700">
-                  <Utensils className="size-7" strokeWidth={1.5} />
+                <span className="inline-flex size-16 items-center justify-center rounded-pill bg-brand-yellow-100 text-brand-yellow-deep">
+                  <Utensils className="size-7" strokeWidth={1.7} />
                 </span>
                 <h3 className="mt-6 font-display text-3xl text-navy">
                   This week&apos;s menu

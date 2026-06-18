@@ -15,12 +15,12 @@ import { faq } from "@/lib/content";
 export function Faq() {
   return (
     <Section id="faq" tone="cream" className="relative overflow-hidden scroll-mt-24">
-      <Atmosphere tone="sage" />
+      <Atmosphere tone="green" />
       <Container className="relative">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <Reveal>
             <div className="lg:sticky lg:top-28">
-              <Eyebrow>{faq.eyebrow}</Eyebrow>
+              <Eyebrow color="green">{faq.eyebrow}</Eyebrow>
               <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.04]">
                 {faq.title}
               </h2>

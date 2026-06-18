@@ -39,14 +39,26 @@ export function Hero() {
               {hero.eyebrow}
             </Reveal>
 
-            {/* H1 — LCP element, rendered statically. Same treatment as
-                the rest of the site's headings (Cormorant, navy). */}
-            <h1 className="mt-6 font-display text-[clamp(2.75rem,5.6vw,4.75rem)] font-medium leading-[1.04] text-navy">
-              {lines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
+            {/* H1 — LCP element, rendered statically (Baloo, navy). The final
+                word gets a playful hand-drawn squiggle underline. */}
+            <h1 className="mt-6 font-display text-[clamp(2.75rem,5.6vw,4.75rem)] font-bold leading-[1.06] text-navy">
+              {lines.map((line, li) => {
+                const isLast = li === lines.length - 1;
+                if (!isLast) {
+                  return (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  );
+                }
+                const words = line.split(" ");
+                const last = words.pop();
+                return (
+                  <span key={line} className="block">
+                    {words.join(" ")} <span className="squiggle">{last}</span>
+                  </span>
+                );
+              })}
             </h1>
 
             <Reveal
@@ -61,7 +73,7 @@ export function Hero() {
               delay={0.45}
               className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
-              <Button asChild size="xl">
+              <Button asChild size="xl" variant="brand">
                 <a href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
               </Button>
               <Button asChild size="xl" variant="secondary">

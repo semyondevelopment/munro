@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Baloo_2, Inter } from "next/font/google";
 import "./globals.css";
 
 import { site } from "@/lib/site";
@@ -8,11 +8,12 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 
-const display = Cormorant_Garamond({
+// Friendly, rounded display face for headings — warm and playful, the right
+// register for an early-learning centre while staying clean and legible.
+const display = Baloo_2({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  weight: ["500", "600", "700"],
+  variable: "--font-baloo",
   display: "swap",
 });
 

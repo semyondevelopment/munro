@@ -6,6 +6,7 @@ import { Reveal } from "@/components/primitives/reveal";
 import { Button } from "@/components/ui/button";
 import { impact } from "@/lib/content";
 import { img } from "@/lib/images";
+import { cn } from "@/lib/utils";
 
 export function Impact() {
   const image = img(impact.image);
@@ -27,7 +28,7 @@ export function Impact() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <Eyebrow>{impact.eyebrow}</Eyebrow>
+            <Eyebrow color="yellow">{impact.eyebrow}</Eyebrow>
             <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.04]">
               {impact.title}
             </h2>
@@ -40,7 +41,7 @@ export function Impact() {
                 <li key={point} className="flex items-start gap-3">
                   <span
                     aria-hidden
-                    className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-sage-600 text-cream"
+                    className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-green-deep text-cream"
                   >
                     <Check className="size-3.5" strokeWidth={2.5} />
                   </span>
@@ -52,11 +53,16 @@ export function Impact() {
             </ul>
 
             <dl className="mt-10 grid grid-cols-3 gap-6 border-t border-navy/10 pt-8">
-              {impact.stats.map((stat) => (
+              {impact.stats.map((stat, i) => (
                 <div key={stat.label}>
                   <dt className="sr-only">{stat.label}</dt>
                   <dd>
-                    <span className="block font-display text-4xl text-navy sm:text-5xl">
+                    <span
+                      className={cn(
+                        "block font-display text-4xl sm:text-5xl",
+                        ["text-brand-blue-deep", "text-brand-green-deep", "text-brand-red-deep"][i % 3],
+                      )}
+                    >
                       {stat.value}
                     </span>
                     <span className="mt-1 block text-sm leading-snug text-ink-soft">

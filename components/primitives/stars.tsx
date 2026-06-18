@@ -29,8 +29,8 @@ export function Stars({
           className={cn(
             "size-4",
             i < full
-              ? "fill-terracotta text-terracotta"
-              : "fill-transparent text-terracotta/40",
+              ? "fill-brand-yellow text-brand-yellow"
+              : "fill-transparent text-brand-yellow/40",
             starClassName,
           )}
           strokeWidth={1.5}

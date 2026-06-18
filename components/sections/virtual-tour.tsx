@@ -53,11 +53,11 @@ export function VirtualTour() {
 
   return (
     <section className="relative overflow-hidden bg-sand py-section">
-      <Atmosphere tone="terracotta" />
+      <Atmosphere tone="blue" />
       <Container className="relative">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <Eyebrow>{tour.eyebrow}</Eyebrow>
+            <Eyebrow color="blue">{tour.eyebrow}</Eyebrow>
             <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.04]">
               {tour.title}
             </h2>

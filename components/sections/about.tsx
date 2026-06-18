@@ -5,6 +5,7 @@ import { Reveal } from "@/components/primitives/reveal";
 import { Atmosphere } from "@/components/primitives/atmosphere";
 import { about } from "@/lib/content";
 import { img } from "@/lib/images";
+import { brandTile } from "@/lib/palette";
 
 export function About() {
   return (
@@ -13,7 +14,7 @@ export function About() {
       <Container className="relative">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <Eyebrow>{about.eyebrow}</Eyebrow>
+            <Eyebrow color="green">{about.eyebrow}</Eyebrow>
             <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.04]">
               {about.title}
             </h2>
@@ -38,10 +39,11 @@ export function About() {
                   />
                 </div>
                 <div className="mt-6">
-                  <span className="font-mono text-xs font-medium tracking-[0.18em] text-terracotta-600">
-                    {String(i + 1).padStart(2, "0")}
+                  <span
+                    className={`inline-flex size-9 items-center justify-center rounded-full font-display text-lg font-bold ${brandTile(i)}`}
+                  >
+                    {i + 1}
                   </span>
-                  <span aria-hidden className="ml-3 inline-block h-px w-8 align-middle bg-sage/60" />
                   <h3 className="mt-4 font-display text-2xl leading-tight">
                     {pillar.name}
                   </h3>

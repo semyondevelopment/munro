@@ -5,7 +5,7 @@ A premium, conversion-focused website for **The Munro Centre** — a community-b
 Two jobs, done well: **make parents want to book a tour**, and **rank locally on Google** for early-learning searches in St Lucia and inner-west Brisbane.
 
 - **Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Motion · Radix UI (shadcn-style components)
-- **Design:** editorial, warm, minimal — Cormorant Garamond display + Inter body, warm earth-tone palette, soft motion.
+- **Design:** warm, friendly, playful — Baloo 2 rounded display + Inter body, the bright logo palette (blue/yellow/green/red) as cheerful accents on a calm cream base, soft motion.
 - **Standalone project:** this lives in its own folder and git repo — it is unrelated to any other project on the machine.
 
 ## Getting started

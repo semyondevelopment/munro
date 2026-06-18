@@ -3,13 +3,14 @@ import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
 import { features } from "@/lib/content";
 import { iconMap } from "@/components/icon-map";
+import { brandTile } from "@/lib/palette";
 
 export function Features() {
   return (
     <section className="bg-sand py-section">
       <Container>
         <div className="max-w-2xl">
-          <Eyebrow>{features.eyebrow}</Eyebrow>
+          <Eyebrow color="blue">{features.eyebrow}</Eyebrow>
           <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.04]">
             {features.title}
           </h2>
@@ -23,11 +24,13 @@ export function Features() {
                 as="li"
                 key={feature.title}
                 delay={(i % 3) * 0.08}
-                className="border-t border-navy/10 pt-6"
+                className="rounded-[var(--radius)] bg-cream p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift"
               >
                 {Icon && (
-                  <span className="inline-flex size-12 items-center justify-center rounded-pill bg-sage-100 text-sage-700">
-                    <Icon className="size-6" strokeWidth={1.6} />
+                  <span
+                    className={`inline-flex size-12 items-center justify-center rounded-2xl ${brandTile(i)}`}
+                  >
+                    <Icon className="size-6" strokeWidth={1.8} />
                   </span>
                 )}
                 <h3 className="mt-5 font-display text-2xl leading-tight">

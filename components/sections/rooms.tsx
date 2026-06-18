@@ -6,15 +6,16 @@ import { Reveal } from "@/components/primitives/reveal";
 import { Atmosphere } from "@/components/primitives/atmosphere";
 import { rooms } from "@/lib/content";
 import { img } from "@/lib/images";
+import { brandTile } from "@/lib/palette";
 
 export function Rooms() {
   return (
     <section id="rooms" className="relative overflow-hidden scroll-mt-24 bg-sand py-section">
-      <Atmosphere tone="terracotta" flip />
+      <Atmosphere tone="yellow" flip />
       <Container className="relative">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <Eyebrow>{rooms.eyebrow}</Eyebrow>
+            <Eyebrow color="yellow">{rooms.eyebrow}</Eyebrow>
             <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.04]">
               {rooms.title}
             </h2>
@@ -38,7 +39,9 @@ export function Rooms() {
                       sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 90vw"
                       className="object-cover"
                     />
-                    <span className="absolute left-4 top-4 rounded-pill bg-cream/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-navy backdrop-blur-sm">
+                    <span
+                      className={`absolute left-4 top-4 rounded-pill px-3 py-1 text-xs font-bold uppercase tracking-[0.1em] ${brandTile(i)}`}
+                    >
                       {room.tag}
                     </span>
                   </div>
@@ -47,7 +50,7 @@ export function Rooms() {
                       <h3 className="font-display text-[1.7rem] leading-tight">
                         {room.name}
                       </h3>
-                      <span className="shrink-0 text-sm font-medium text-terracotta-700">
+                      <span className="shrink-0 rounded-pill bg-sand-200 px-2.5 py-0.5 text-xs font-semibold text-navy">
                         {room.age}
                       </span>
                     </div>

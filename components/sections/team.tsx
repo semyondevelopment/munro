@@ -15,7 +15,7 @@ export function Team() {
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal className="order-2 lg:order-1">
-            <Eyebrow>{team.eyebrow}</Eyebrow>
+            <Eyebrow color="blue">{team.eyebrow}</Eyebrow>
             <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.04]">
               {team.title}
             </h2>
@@ -27,7 +27,7 @@ export function Team() {
                 <li key={point} className="flex items-start gap-3">
                   <span
                     aria-hidden
-                    className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-sage-600 text-cream"
+                    className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-green-deep text-cream"
                   >
                     <Check className="size-3.5" strokeWidth={2.5} />
                   </span>

@@ -2,7 +2,9 @@
 
 /* ==========================================================================
    The Munro Centre — Design System
-   Editorial · warm · premium · minimal. Aesop × Airbnb × high-end school.
+   Warm · friendly · playful · simple. A joyful not-for-profit early-learning
+   centre: rounded type, soft shapes, and the bright logo palette — kept clean
+   and trustworthy, never childish or cluttered.
    ========================================================================== */
 
 @theme {
@@ -43,8 +45,23 @@
   --color-brand-green: #6fb43f;
   --color-brand-green-deep: #4f8f2c; /* AA-compliant green for small text */
 
+  /* Soft tints of the brand colours — for friendly chips, icon tiles and the
+     playful background shapes. Backgrounds pair with navy text; the *-deep
+     tokens are AA-compliant for small coloured text on light surfaces. */
+  --color-brand-blue-100: #e1f3fb;
+  --color-brand-blue-200: #c2e7f7;
+  --color-brand-blue-deep: #11688f;
+  --color-brand-yellow-100: #fdf2cd;
+  --color-brand-yellow-200: #fbe6a3;
+  --color-brand-yellow-deep: #9a6a07; /* amber, AA on light */
+  --color-brand-green-100: #e7f4d8;
+  --color-brand-green-200: #d2ebba;
+  --color-brand-red-100: #fbe2df;
+  --color-brand-red-200: #f6c7c2;
+  --color-brand-red-deep: #c52a22; /* AA on light */
+
   /* ---- Typography ------------------------------------------------------- */
-  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-display: var(--font-baloo), "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   /* ---- Radii ------------------------------------------------------------ */
@@ -102,9 +119,9 @@
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     color: var(--color-navy);
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    line-height: 1.04;
+    font-weight: 600; /* Baloo reads friendliest with a touch more weight */
+    letter-spacing: -0.005em;
+    line-height: 1.1;
     text-wrap: balance;
   }
 
@@ -113,8 +130,8 @@
   }
 
   ::selection {
-    background-color: var(--color-terracotta);
-    color: var(--color-cream);
+    background-color: var(--color-brand-yellow);
+    color: var(--color-navy);
   }
 
   :focus-visible {
@@ -154,13 +171,23 @@
     max-width: 62ch;
   }
 
-  /* Eyebrow / kicker label */
+  /* Eyebrow / kicker label — friendly pill chip (see Eyebrow primitive) */
   .eyebrow {
     font-family: var(--font-sans);
     font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+  }
+
+  /* Hand-drawn-ish accent underline for a highlighted word in a heading.
+     Wrap the word: <span class="squiggle">belong</span>. Purely decorative. */
+  .squiggle {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C 22 2, 38 2, 58 7 S 98 12, 118 5' fill='none' stroke='%23f5c231' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 0.5em;
+    padding-bottom: 0.08em;
   }
 
   /* Fine top hairline used to separate editorial blocks */

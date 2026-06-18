@@ -10,6 +10,8 @@ const buttonVariants = cva(
       variant: {
         primary:
           "bg-navy text-cream shadow-soft hover:bg-navy-700 hover:shadow-lift hover:-translate-y-0.5",
+        brand:
+          "bg-brand-green-deep text-cream shadow-soft hover:bg-[#447d26] hover:shadow-lift hover:-translate-y-0.5",
         accent:
           "bg-terracotta text-cream shadow-soft hover:bg-terracotta-600 hover:shadow-lift hover:-translate-y-0.5",
         secondary:

@@ -17,6 +17,11 @@ export function Testimonials() {
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState(1);
   const [paused, setPaused] = useState(false);
+  // Gate the enter animation until after mount so the first quote is rendered
+  // visible server-side (Framer's `initial` would otherwise emit opacity:0 as
+  // an SSR inline style — invisible on Vercel until JS hydrates).
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const go = useCallback((step: number) => {
     setDir(step > 0 ? 1 : -1);
@@ -51,9 +56,9 @@ export function Testimonials() {
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={() => setPaused(false)}
     >
-      <Atmosphere tone="terracotta" flip />
+      <Atmosphere tone="red" flip />
       <Container size="narrow" className="relative text-center">
-        <Eyebrow center>{testimonials.eyebrow}</Eyebrow>
+        <Eyebrow center color="red">{testimonials.eyebrow}</Eyebrow>
         <h2 className="mt-6 font-display text-[clamp(2.25rem,4.5vw,3.5rem)] leading-tight">
           {testimonials.title}
         </h2>
@@ -61,7 +66,7 @@ export function Testimonials() {
         <div className="relative mt-12 min-h-[18rem] sm:min-h-[15rem]" aria-live="polite">
           <span
             aria-hidden
-            className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 select-none font-display text-[10rem] leading-none text-terracotta/15"
+            className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 select-none font-display text-[10rem] leading-none text-brand-yellow/40"
           >
             &ldquo;
           </span>
@@ -70,13 +75,13 @@ export function Testimonials() {
             <motion.figure
               key={index}
               custom={dir}
-              initial={reduce ? false : { opacity: 0, x: dir * 40 }}
+              initial={reduce || !mounted ? false : { opacity: 0, x: dir * 40 }}
               animate={reduce ? undefined : { opacity: 1, x: 0 }}
               exit={reduce ? undefined : { opacity: 0, x: dir * -40 }}
               transition={{ duration: 0.55, ease: EASE_OUT_EXPO }}
               className="relative flex flex-col items-center"
             >
-              <blockquote className="font-display text-[clamp(1.6rem,3vw,2.4rem)] font-medium italic leading-snug text-navy">
+              <blockquote className="font-display text-[clamp(1.6rem,3vw,2.4rem)] font-medium leading-snug text-navy">
                 {active.quote}
               </blockquote>
               <figcaption className="mt-8 text-sm font-medium uppercase tracking-[0.16em] text-ink-soft">
@@ -107,7 +112,7 @@ export function Testimonials() {
                 aria-current={i === index}
                 className={cn(
                   "h-2 rounded-full transition-all duration-400 ease-out-expo",
-                  i === index ? "w-7 bg-terracotta-600" : "w-2 bg-navy/20 hover:bg-navy/40",
+                  i === index ? "w-7 bg-brand-green" : "w-2 bg-navy/20 hover:bg-navy/40",
                 )}
               />
             ))}
