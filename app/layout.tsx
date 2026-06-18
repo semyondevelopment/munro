@@ -7,6 +7,7 @@ import { homeJsonLd } from "@/lib/seo";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
+import { ScrollProgress } from "@/components/layout/scroll-progress";
 
 // Friendly, rounded display face for headings — warm and playful, the right
 // register for an early-learning centre while staying clean and legible.
@@ -97,6 +98,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <ScrollProgress />
         <Navbar />
         <main id="main">{children}</main>
         <Footer />

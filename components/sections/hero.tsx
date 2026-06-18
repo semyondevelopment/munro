@@ -26,6 +26,23 @@ export function Hero() {
         className="pointer-events-none absolute -bottom-40 -left-24 size-[28rem] rounded-full bg-terracotta-100/60 blur-3xl"
       />
 
+      {/* Playful floating shapes */}
+      <span
+        aria-hidden
+        className="animate-float pointer-events-none absolute left-[8%] top-32 hidden size-4 rounded-full bg-brand-yellow/70 sm:block"
+        style={{ animationDelay: "0.4s" }}
+      />
+      <span
+        aria-hidden
+        className="animate-float pointer-events-none absolute right-[6%] top-44 hidden size-6 rounded-lg bg-brand-blue/40 sm:block lg:right-[42%]"
+        style={{ animationDelay: "1.4s" }}
+      />
+      <span
+        aria-hidden
+        className="animate-float pointer-events-none absolute bottom-24 left-[40%] hidden size-3 rounded-full bg-brand-red/50 sm:block"
+        style={{ animationDelay: "2.1s" }}
+      />
+
       <Container className="relative">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           {/* Content */}

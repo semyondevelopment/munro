@@ -20,11 +20,11 @@ export function TrustBar() {
                 key={item.label}
                 delay={(i % 6) * 0.06}
                 y={16}
-                className="flex flex-col items-center gap-2 text-center lg:px-5"
+                className="group flex flex-col items-center gap-2 text-center lg:px-5"
               >
                 {Icon && (
                   <span
-                    className={`inline-flex size-12 items-center justify-center rounded-2xl ${brandTile(i)}`}
+                    className={`wiggle inline-flex size-12 items-center justify-center rounded-2xl ${brandTile(i)}`}
                   >
                     <Icon className="size-6" strokeWidth={1.8} />
                   </span>

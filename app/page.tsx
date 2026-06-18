@@ -2,11 +2,14 @@ import { Hero } from "@/components/sections/hero";
 import { TrustBar } from "@/components/sections/trust-bar";
 import { About } from "@/components/sections/about";
 import { Rooms } from "@/components/sections/rooms";
+import { RoomFinder } from "@/components/sections/room-finder";
 import { Welcome } from "@/components/sections/welcome";
 import { Features } from "@/components/sections/features";
 import { Meals } from "@/components/sections/meals";
-import { Team } from "@/components/sections/team";
+import { DayAtMunro } from "@/components/sections/day-at-munro";
+import { Educators } from "@/components/sections/educators";
 import { Impact } from "@/components/sections/impact";
+import { Fees } from "@/components/sections/fees";
 import { Testimonials } from "@/components/sections/testimonials";
 import { VirtualTour } from "@/components/sections/virtual-tour";
 import { Philosophy } from "@/components/sections/philosophy";
@@ -22,12 +25,15 @@ export default function HomePage() {
       <TrustBar />
       <About />
       <Rooms />
+      <RoomFinder />
       <Welcome />
       <Features />
       <Meals />
-      <Team />
-      <SoftDivider from="sand" to="sage" />
+      <DayAtMunro />
+      <Educators />
+      <SoftDivider from="cream" to="sage" />
       <Impact />
+      <Fees />
       <SoftDivider from="sage" to="cream" />
       <Testimonials />
       <VirtualTour />

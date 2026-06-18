@@ -18,6 +18,7 @@ export const nav: NavLink[] = [
   { label: "Rooms", href: "#rooms" },
   { label: "Community", href: "#welcome" },
   { label: "Meals", href: "#meals" },
+  { label: "Fees", href: "#fees" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
@@ -351,4 +352,143 @@ export const footer = {
       ],
     },
   ],
+};
+
+/* ===========================================================================
+   Interactive Room Finder
+   Age bounds (in months) for each room — overlaps are intentional, since
+   several rooms span similar ages. Keyed by room.key.
+   ======================================================================== */
+export const roomAgeMonths: Record<string, { min: number; max: number }> = {
+  gtf: { min: 0, max: 15 },
+  bandicoots: { min: 15, max: 24 },
+  echidna: { min: 15, max: 30 },
+  "cassowary-chicks": { min: 18, max: 30 },
+  cassowary: { min: 24, max: 42 },
+  kookaburra: { min: 42, max: 66 },
+};
+
+export const roomFinder = {
+  eyebrow: "Find your room",
+  title: "Which room is right for your child?",
+  copy: "Tell us how old your little one is and we'll show you where they'd belong — then book a tour to come and see it.",
+  /** Quick-pick age presets (in months). */
+  presets: [
+    { label: "Baby", detail: "6 wks–15 mo", months: 9 },
+    { label: "Toddler", detail: "15 mo–2 yrs", months: 20 },
+    { label: "Pre-kindy", detail: "2–3.5 yrs", months: 34 },
+    { label: "Kindy", detail: "3.5 yrs+", months: 48 },
+  ],
+};
+
+/* ===========================================================================
+   Meet the Educators
+   PLACEHOLDER people — names, roles and details are illustrative sample data
+   to show the layout. Replace with the centre's real team (with consent and
+   photos) before launch. Avatars render coloured initials, so no portrait
+   photography is required to ship the design.
+   ======================================================================== */
+export type Educator = {
+  name: string;
+  role: string;
+  room: string;
+  years: string;
+  languages: string[];
+  quote: string;
+};
+
+export const educators = {
+  eyebrow: "Meet the team",
+  title: "The people your child will love",
+  copy: "Qualified, warm and wonderfully diverse — many of our educators have been with Munro for years. They speak your child's languages, know them by name, and treat your family like their own.",
+  // PLACEHOLDER — replace with real educators before launch.
+  people: [
+    {
+      name: "Ana",
+      role: "Centre Director",
+      room: "Whole centre",
+      years: "20+ years",
+      languages: ["English", "Spanish"],
+      quote: "Every child here is known, celebrated and safe — that's the promise we keep every single day.",
+    },
+    {
+      name: "Mei",
+      role: "Lead Educator",
+      room: "Kookaburra · Kindy",
+      years: "9 years",
+      languages: ["English", "Mandarin"],
+      quote: "I love watching our kindy kids grow into confident, curious little learners ready for school.",
+    },
+    {
+      name: "Priya",
+      role: "Early Childhood Teacher",
+      room: "Cassowary",
+      years: "7 years",
+      languages: ["English", "Hindi"],
+      quote: "Play is how children make sense of the world — my job is to follow their wonder.",
+    },
+    {
+      name: "Sose",
+      role: "Educator",
+      room: "GTF · Nursery",
+      years: "11 years",
+      languages: ["English", "Samoan"],
+      quote: "Our littlest ones need tender, responsive care — and so do their parents. We're here for both.",
+    },
+    {
+      name: "Lucas",
+      role: "Educator",
+      room: "Bandicoots",
+      years: "5 years",
+      languages: ["English", "Portuguese"],
+      quote: "Big feelings, first words, new friendships — toddler days are never dull and I wouldn't trade them.",
+    },
+    {
+      name: "Hana",
+      role: "Educator & Cultural Lead",
+      room: "Echidna",
+      years: "8 years",
+      languages: ["English", "Japanese"],
+      quote: "We weave every family's culture into our days — belonging is something children can feel.",
+    },
+  ] as Educator[],
+};
+
+/* ===========================================================================
+   A Day at Munro — the rhythm of a typical day (answers a top parent worry).
+   ======================================================================== */
+export const daySchedule = {
+  eyebrow: "A day at Munro",
+  title: "What a day with us looks like",
+  copy: "Unhurried, predictable and full of play. Every day flows to a gentle rhythm that helps children feel secure — with plenty of room for discovery in between.",
+  steps: [
+    { time: "7:30am", title: "Warm welcomes", copy: "Soft starts, familiar faces and a calm landing into the day." },
+    { time: "9:00am", title: "Morning tea & play", copy: "Freshly catered morning tea, then child-led indoor and outdoor play." },
+    { time: "10:30am", title: "Intentional learning", copy: "Play-based experiences guided by educators — language, art, nature and culture." },
+    { time: "12:00pm", title: "Lunch together", copy: "A nutritious cooked lunch by KGF, shared around the table." },
+    { time: "1:00pm", title: "Rest & quiet time", copy: "Sleep or restful play, tailored to each child's needs." },
+    { time: "3:00pm", title: "Afternoon adventures", copy: "Afternoon tea, more play and projects that follow the children's interests." },
+    { time: "6:00pm", title: "Happy goodbyes", copy: "Daily highlights and photos shared with you through the OWNA app." },
+  ],
+};
+
+/* ===========================================================================
+   Fees & Child Care Subsidy (CCS)
+   The estimator uses the official 2024–25 CCS taper, but the base daily fee is
+   an EDITABLE SAMPLE — confirm the centre's real fee before relying on figures.
+   ======================================================================== */
+export const fees = {
+  eyebrow: "Fees & subsidy",
+  title: "Affordable, transparent — and not-for-profit",
+  copy: "As a community-owned centre, our fees go straight back into your child's care, never to shareholders. Most families also access the Child Care Subsidy (CCS), which significantly reduces what you actually pay.",
+  points: [
+    { title: "Child Care Subsidy", copy: "Eligible families can have a large share of fees subsidised by the government, paid directly to us." },
+    { title: "Every dollar reinvested", copy: "Surplus goes back into educators, resources and your child's everyday experience." },
+    { title: "No hidden extras", copy: "Meals, nappies and the kindy program are included — no lunchboxes, no surprises." },
+  ],
+  estimator: {
+    /** SAMPLE daily fee — editable in the UI. Confirm the real figure. */
+    sampleDailyFee: 130,
+    note: "Indicative only. CCS depends on your income, activity level and child's age — we'll give you exact figures on your tour.",
+  },
 };

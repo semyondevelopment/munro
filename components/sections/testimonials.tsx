@@ -17,11 +17,6 @@ export function Testimonials() {
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState(1);
   const [paused, setPaused] = useState(false);
-  // Gate the enter animation until after mount so the first quote is rendered
-  // visible server-side (Framer's `initial` would otherwise emit opacity:0 as
-  // an SSR inline style — invisible on Vercel until JS hydrates).
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
 
   const go = useCallback((step: number) => {
     setDir(step > 0 ? 1 : -1);
@@ -71,11 +66,14 @@ export function Testimonials() {
             &ldquo;
           </span>
 
-          <AnimatePresence mode="wait" custom={dir}>
+          {/* initial={false} skips the enter animation on first mount, so the
+              first quote renders visible server-side (no opacity:0 SSR style)
+              while slide changes still animate. */}
+          <AnimatePresence mode="wait" custom={dir} initial={false}>
             <motion.figure
               key={index}
               custom={dir}
-              initial={reduce || !mounted ? false : { opacity: 0, x: dir * 40 }}
+              initial={reduce ? false : { opacity: 0, x: dir * 40 }}
               animate={reduce ? undefined : { opacity: 1, x: 0 }}
               exit={reduce ? undefined : { opacity: 0, x: dir * -40 }}
               transition={{ duration: 0.55, ease: EASE_OUT_EXPO }}

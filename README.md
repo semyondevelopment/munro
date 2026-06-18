@@ -34,10 +34,11 @@ lib/
   seo.ts               JSON-LD (LocalBusiness/ChildCare, WebSite, per-room programs, FAQPage)
   motion.ts / utils.ts
 components/
-  brand/ · primitives/ (Container, Section, Eyebrow, Reveal, Stars) · ui/ (Button, Accordion, Dialog)
-  layout/ (Navbar, Footer, MobileCtaBar) · icon-map.ts
-  sections/  Hero · TrustBar · About · Rooms · Welcome · Features · Meals · Team ·
-             Impact · Testimonials · VirtualTour · Philosophy · Faq · FinalCta · BookTour
+  brand/ · primitives/ (Container, Section, Eyebrow, Reveal, Stars, CountUp, Atmosphere) · ui/ (Button, Accordion, Dialog)
+  layout/ (Navbar, Footer, MobileCtaBar, ScrollProgress) · icon-map.ts
+  sections/  Hero · TrustBar · About · Rooms · RoomFinder · Welcome · Features · Meals ·
+             DayAtMunro · Educators · Impact · Fees · Testimonials · VirtualTour ·
+             Philosophy · Faq · FinalCta · BookTour
 public/images/         The centre's own photography
 ```
 

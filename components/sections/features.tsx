@@ -24,11 +24,11 @@ export function Features() {
                 as="li"
                 key={feature.title}
                 delay={(i % 3) * 0.08}
-                className="rounded-[var(--radius)] bg-cream p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift"
+                className="group rounded-[var(--radius)] bg-cream p-6 shadow-soft transition-all duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-lift"
               >
                 {Icon && (
                   <span
-                    className={`inline-flex size-12 items-center justify-center rounded-2xl ${brandTile(i)}`}
+                    className={`wiggle inline-flex size-12 items-center justify-center rounded-2xl ${brandTile(i)}`}
                   >
                     <Icon className="size-6" strokeWidth={1.8} />
                   </span>
