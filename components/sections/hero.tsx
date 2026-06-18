@@ -1,28 +1,15 @@
-"use client";
-
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
 import { Phone, Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/primitives/container";
+import { Reveal } from "@/components/primitives/reveal";
 import { hero } from "@/lib/content";
 import { img } from "@/lib/images";
-import { EASE_OUT_EXPO } from "@/lib/motion";
 
 export function Hero() {
-  const reduce = useReducedMotion();
   const image = img(hero.image);
   const secondary = img(hero.imageSecondary);
   const lines = hero.title.split("\n");
-
-  const rise = (delay: number) =>
-    reduce
-      ? {}
-      : {
-          initial: { opacity: 0, y: 22 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.75, delay, ease: EASE_OUT_EXPO },
-        };
 
   return (
     <section
@@ -43,13 +30,14 @@ export function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           {/* Content */}
           <div className="max-w-xl">
-            <motion.span
-              {...rise(0.05)}
+            <Reveal
+              as="span"
+              delay={0.05}
               className="inline-flex items-center gap-2 rounded-pill bg-sage-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-brand-green-deep"
             >
               <span className="size-1.5 rounded-full bg-brand-green" />
               {hero.eyebrow}
-            </motion.span>
+            </Reveal>
 
             {/* H1 — LCP element, rendered statically. Same treatment as
                 the rest of the site's headings (Cormorant, navy). */}
@@ -61,15 +49,16 @@ export function Hero() {
               ))}
             </h1>
 
-            <motion.p
-              {...rise(0.3)}
+            <Reveal
+              as="p"
+              delay={0.3}
               className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft"
             >
               {hero.subhead}
-            </motion.p>
+            </Reveal>
 
-            <motion.div
-              {...rise(0.45)}
+            <Reveal
+              delay={0.45}
               className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
               <Button asChild size="xl">
@@ -81,10 +70,11 @@ export function Hero() {
                   {hero.secondaryCta.label}
                 </a>
               </Button>
-            </motion.div>
+            </Reveal>
 
-            <motion.ul
-              {...rise(0.6)}
+            <Reveal
+              as="ul"
+              delay={0.6}
               className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-navy/10 pt-7 text-sm font-medium text-ink"
             >
               {hero.highlights.map((h) => (
@@ -93,17 +83,12 @@ export function Hero() {
                   {h}
                 </li>
               ))}
-            </motion.ul>
+            </Reveal>
           </div>
 
           {/* Image collage */}
           <div className="relative">
-            <motion.div
-              initial={reduce ? false : { opacity: 0, scale: 0.96 }}
-              animate={reduce ? undefined : { opacity: 1, scale: 1 }}
-              transition={{ duration: 0.9, ease: EASE_OUT_EXPO }}
-              className="img-zoom relative ml-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2rem] bg-sand shadow-hero lg:max-w-none"
-            >
+            <Reveal className="img-zoom relative ml-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2rem] bg-sand shadow-hero lg:max-w-none">
               <Image
                 src={image.src}
                 alt={image.alt}
@@ -112,11 +97,11 @@ export function Hero() {
                 sizes="(min-width:1024px) 44vw, 90vw"
                 className="object-cover"
               />
-            </motion.div>
+            </Reveal>
 
             {/* Overlapping secondary image */}
-            <motion.div
-              {...rise(0.5)}
+            <Reveal
+              delay={0.5}
               className="absolute -bottom-7 -left-3 hidden aspect-square w-[40%] overflow-hidden rounded-[1.5rem] shadow-lift ring-[6px] ring-cream sm:block lg:-left-8"
             >
               <Image
@@ -126,11 +111,11 @@ export function Hero() {
                 sizes="(min-width:1024px) 18vw, 40vw"
                 className="object-cover"
               />
-            </motion.div>
+            </Reveal>
 
             {/* Floating credential card */}
-            <motion.div
-              {...rise(0.7)}
+            <Reveal
+              delay={0.7}
               className="absolute -right-3 top-8 hidden items-center gap-3 rounded-2xl bg-cream/95 px-4 py-3 shadow-lift ring-1 ring-navy/5 backdrop-blur-sm sm:flex lg:-right-6"
             >
               <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-green/15 text-brand-green-deep">
@@ -142,7 +127,7 @@ export function Hero() {
                   Community-owned in St Lucia
                 </span>
               </span>
-            </motion.div>
+            </Reveal>
           </div>
         </div>
       </Container>

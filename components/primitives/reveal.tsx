@@ -12,7 +12,7 @@ type RevealProps = {
   /** Vertical travel distance in px. */
   y?: number;
   /** Render container element. */
-  as?: "div" | "li" | "span";
+  as?: "div" | "li" | "span" | "p" | "ul";
 };
 
 const EASING = "cubic-bezier(0.16,1,0.3,1)";
