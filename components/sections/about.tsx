@@ -3,29 +3,39 @@ import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
 import { Atmosphere } from "@/components/primitives/atmosphere";
-import { about } from "@/lib/content";
+import { about as staticAbout } from "@/lib/content";
 import { img } from "@/lib/images";
 
-export function About() {
+type AboutProps = {
+  intro?: string;
+  pillarBelong?: string;
+  pillarGrow?: string;
+  pillarThrive?: string;
+};
+
+export function About({ intro, pillarBelong, pillarGrow, pillarThrive }: AboutProps) {
+  const cmsPillarCopy = [pillarBelong, pillarGrow, pillarThrive];
+
   return (
     <section id="about" className="relative overflow-hidden scroll-mt-24 bg-cream py-section">
       <Atmosphere tone="sage" />
       <Container className="relative">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <Eyebrow>{about.eyebrow}</Eyebrow>
+            <Eyebrow>{staticAbout.eyebrow}</Eyebrow>
             <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.04]">
-              {about.title}
+              {staticAbout.title}
             </h2>
           </div>
           <p className="max-w-md text-[1.02rem] leading-relaxed text-ink-soft">
-            {about.intro}
+            {intro || staticAbout.intro}
           </p>
         </div>
 
         <ul className="mt-14 grid gap-x-7 gap-y-12 md:grid-cols-3">
-          {about.pillars.map((pillar, i) => {
+          {staticAbout.pillars.map((pillar, i) => {
             const image = img(pillar.image);
+            const copy = cmsPillarCopy[i] || pillar.copy;
             return (
               <Reveal as="li" key={pillar.key} delay={i * 0.08}>
                 <div className="img-zoom relative aspect-[4/5] overflow-hidden rounded-[var(--radius)] bg-sand shadow-soft">
@@ -46,7 +56,7 @@ export function About() {
                     {pillar.name}
                   </h3>
                   <p className="mt-3 text-[0.97rem] leading-relaxed text-ink-soft">
-                    {pillar.copy}
+                    {copy}
                   </p>
                 </div>
               </Reveal>

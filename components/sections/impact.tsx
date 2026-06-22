@@ -4,11 +4,20 @@ import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
 import { Button } from "@/components/ui/button";
-import { impact } from "@/lib/content";
+import { impact as staticImpact } from "@/lib/content";
 import { img } from "@/lib/images";
 
-export function Impact() {
-  const image = img(impact.image);
+type StatItem = { value: string; label: string };
+
+type ImpactProps = {
+  copy?: string;
+  stats?: StatItem[];
+};
+
+export function Impact({ copy, stats }: ImpactProps) {
+  const image = img(staticImpact.image);
+  const activeCopy = copy || staticImpact.copy;
+  const activeStats = stats?.length ? stats : staticImpact.stats;
 
   return (
     <section id="not-for-profit" className="scroll-mt-24 bg-sage-100 py-section">
@@ -27,16 +36,16 @@ export function Impact() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <Eyebrow>{impact.eyebrow}</Eyebrow>
+            <Eyebrow>{staticImpact.eyebrow}</Eyebrow>
             <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.04]">
-              {impact.title}
+              {staticImpact.title}
             </h2>
             <p className="mt-6 max-w-xl text-[1.05rem] leading-relaxed text-ink-soft">
-              {impact.copy}
+              {activeCopy}
             </p>
 
             <ul className="mt-8 flex flex-col gap-4">
-              {impact.points.map((point) => (
+              {staticImpact.points.map((point) => (
                 <li key={point} className="flex items-start gap-3">
                   <span
                     aria-hidden
@@ -52,7 +61,7 @@ export function Impact() {
             </ul>
 
             <dl className="mt-10 grid grid-cols-3 gap-6 border-t border-navy/10 pt-8">
-              {impact.stats.map((stat) => (
+              {activeStats.map((stat) => (
                 <div key={stat.label}>
                   <dt className="sr-only">{stat.label}</dt>
                   <dd>

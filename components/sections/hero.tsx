@@ -5,15 +5,22 @@ import { motion, useReducedMotion } from "motion/react";
 import { Phone, Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/primitives/container";
-import { hero } from "@/lib/content";
+import { hero as staticHero } from "@/lib/content";
 import { img } from "@/lib/images";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 
-export function Hero() {
+type HeroProps = {
+  highlights?: string[];
+  subhead?: string;
+};
+
+export function Hero({ highlights, subhead }: HeroProps) {
   const reduce = useReducedMotion();
-  const image = img(hero.image);
-  const secondary = img(hero.imageSecondary);
-  const lines = hero.title.split("\n");
+  const image = img(staticHero.image);
+  const secondary = img(staticHero.imageSecondary);
+  const lines = staticHero.title.split("\n");
+  const activeHighlights = highlights?.length ? highlights : staticHero.highlights;
+  const activeSubhead = subhead || staticHero.subhead;
 
   const rise = (delay: number) =>
     reduce
@@ -48,7 +55,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 rounded-pill bg-sage-100 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-brand-green-deep"
             >
               <span className="size-1.5 rounded-full bg-brand-green" />
-              {hero.eyebrow}
+              {staticHero.eyebrow}
             </motion.span>
 
             {/* H1 — LCP element, rendered statically. Same treatment as
@@ -65,7 +72,7 @@ export function Hero() {
               {...rise(0.3)}
               className="mt-6 max-w-md text-lg leading-relaxed text-ink-soft"
             >
-              {hero.subhead}
+              {activeSubhead}
             </motion.p>
 
             <motion.div
@@ -73,12 +80,12 @@ export function Hero() {
               className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
               <Button asChild size="xl">
-                <a href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
+                <a href={staticHero.primaryCta.href}>{staticHero.primaryCta.label}</a>
               </Button>
               <Button asChild size="xl" variant="secondary">
-                <a href={hero.secondaryCta.href}>
+                <a href={staticHero.secondaryCta.href}>
                   <Phone className="size-4" strokeWidth={1.9} />
-                  {hero.secondaryCta.label}
+                  {staticHero.secondaryCta.label}
                 </a>
               </Button>
             </motion.div>
@@ -87,7 +94,7 @@ export function Hero() {
               {...rise(0.6)}
               className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-navy/10 pt-7 text-sm font-medium text-ink"
             >
-              {hero.highlights.map((h) => (
+              {activeHighlights.map((h) => (
                 <li key={h} className="inline-flex items-center gap-2">
                   <Check className="size-4 text-brand-green-deep" strokeWidth={2.6} />
                   {h}

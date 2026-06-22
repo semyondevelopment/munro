@@ -10,9 +10,14 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { faq } from "@/lib/content";
+import { faq as staticFaq } from "@/lib/content";
 
-export function Faq() {
+type FaqItem = { q: string; a: string };
+
+export function Faq({ cmsItems }: { cmsItems?: FaqItem[] }) {
+  const items: FaqItem[] =
+    cmsItems && cmsItems.length > 0 ? cmsItems : staticFaq.items;
+
   return (
     <Section id="faq" tone="cream" className="relative overflow-hidden scroll-mt-24">
       <Atmosphere tone="sage" />
@@ -20,9 +25,9 @@ export function Faq() {
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <Reveal>
             <div className="lg:sticky lg:top-28">
-              <Eyebrow>{faq.eyebrow}</Eyebrow>
+              <Eyebrow>{staticFaq.eyebrow}</Eyebrow>
               <h2 className="mt-6 font-display text-[clamp(2.5rem,5vw,4rem)] leading-[1.04]">
-                {faq.title}
+                {staticFaq.title}
               </h2>
               <p className="mt-6 max-w-sm text-[1.02rem] leading-relaxed text-ink-soft">
                 Still wondering? Call us on the number below, or book a tour and
@@ -36,7 +41,7 @@ export function Faq() {
 
           <Reveal delay={0.08}>
             <Accordion type="single" collapsible className="w-full">
-              {faq.items.map((item, i) => (
+              {items.map((item, i) => (
                 <AccordionItem key={i} value={`item-${i}`}>
                   <AccordionTrigger>{item.q}</AccordionTrigger>
                   <AccordionContent>{item.a}</AccordionContent>

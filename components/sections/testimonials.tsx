@@ -6,22 +6,29 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Atmosphere } from "@/components/primitives/atmosphere";
-import { testimonials } from "@/lib/content";
+import { testimonials as staticData } from "@/lib/content";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-const items = testimonials.items;
+type TestimonialItem = { quote: string; name: string; detail: string };
 
-export function Testimonials() {
+export function Testimonials({ cmsItems }: { cmsItems?: TestimonialItem[] }) {
+  const items: TestimonialItem[] =
+    cmsItems && cmsItems.length > 0 ? cmsItems : staticData.items;
+  const count = items.length;
+
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState(1);
   const [paused, setPaused] = useState(false);
 
-  const go = useCallback((step: number) => {
-    setDir(step > 0 ? 1 : -1);
-    setIndex((i) => (i + step + items.length) % items.length);
-  }, []);
+  const go = useCallback(
+    (step: number) => {
+      setDir(step > 0 ? 1 : -1);
+      setIndex((i) => (i + step + count) % count);
+    },
+    [count],
+  );
 
   const toIndex = useCallback(
     (i: number) => {
@@ -39,7 +46,8 @@ export function Testimonials() {
     return () => clearInterval(id);
   }, [reduce, paused, go, index]);
 
-  const active = items[index];
+  const safeIndex = index < count ? index : 0;
+  const active = items[safeIndex];
 
   return (
     <section
@@ -53,9 +61,9 @@ export function Testimonials() {
     >
       <Atmosphere tone="terracotta" flip />
       <Container size="narrow" className="relative text-center">
-        <Eyebrow center>{testimonials.eyebrow}</Eyebrow>
+        <Eyebrow center>{staticData.eyebrow}</Eyebrow>
         <h2 className="mt-6 font-display text-[clamp(2.25rem,4.5vw,3.5rem)] leading-tight">
-          {testimonials.title}
+          {staticData.title}
         </h2>
 
         <div className="relative mt-12 min-h-[18rem] sm:min-h-[15rem]" aria-live="polite">
@@ -68,7 +76,7 @@ export function Testimonials() {
 
           <AnimatePresence mode="wait" custom={dir}>
             <motion.figure
-              key={index}
+              key={safeIndex}
               custom={dir}
               initial={reduce ? false : { opacity: 0, x: dir * 40 }}
               animate={reduce ? undefined : { opacity: 1, x: 0 }}
@@ -80,7 +88,8 @@ export function Testimonials() {
                 {active.quote}
               </blockquote>
               <figcaption className="mt-8 text-sm font-medium uppercase tracking-[0.16em] text-ink-soft">
-                {active.name} · {active.detail}
+                {active.name}
+                {active.detail ? ` · ${active.detail}` : ""}
               </figcaption>
             </motion.figure>
           </AnimatePresence>
@@ -104,10 +113,12 @@ export function Testimonials() {
                 type="button"
                 onClick={() => toIndex(i)}
                 aria-label={`Go to testimonial ${i + 1}`}
-                aria-current={i === index}
+                aria-current={i === safeIndex}
                 className={cn(
                   "h-2 rounded-full transition-all duration-400 ease-out-expo",
-                  i === index ? "w-7 bg-terracotta-600" : "w-2 bg-navy/20 hover:bg-navy/40",
+                  i === safeIndex
+                    ? "w-7 bg-terracotta-600"
+                    : "w-2 bg-navy/20 hover:bg-navy/40",
                 )}
               />
             ))}

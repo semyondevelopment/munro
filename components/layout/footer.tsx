@@ -4,8 +4,17 @@ import { Container } from "@/components/primitives/container";
 import { site } from "@/lib/site";
 import { footer } from "@/lib/content";
 
-export function Footer() {
+type FooterProps = {
+  facebook?: string;
+  instagram?: string;
+  openingHours?: string;
+};
+
+export function Footer({ facebook, instagram, openingHours }: FooterProps) {
   const year = 2026;
+  const fbUrl = facebook || site.social.facebook;
+  const igUrl = instagram || site.social.instagram;
+  const hours = openingHours || site.hours.display;
 
   return (
     <footer
@@ -25,14 +34,14 @@ export function Footer() {
             </p>
             <div className="mt-7 flex items-center gap-3">
               <a
-                href={site.social.facebook}
+                href={fbUrl}
                 aria-label="The Munro Centre on Facebook"
                 className="inline-flex size-11 items-center justify-center rounded-pill border border-cream/15 text-cream/70 transition-colors hover:border-cream/35 hover:text-cream"
               >
                 <FacebookIcon />
               </a>
               <a
-                href={site.social.instagram}
+                href={igUrl}
                 aria-label="The Munro Centre on Instagram"
                 className="inline-flex size-11 items-center justify-center rounded-pill border border-cream/15 text-cream/70 transition-colors hover:border-cream/35 hover:text-cream"
               >
@@ -84,7 +93,7 @@ export function Footer() {
               </li>
               <li className="flex gap-3">
                 <Clock className="mt-0.5 size-5 shrink-0 text-sage" strokeWidth={1.6} />
-                <span>{site.hours.display}</span>
+                <span>{hours}</span>
               </li>
             </ul>
           </div>

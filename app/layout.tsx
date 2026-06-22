@@ -4,9 +4,6 @@ import "./globals.css";
 
 import { site } from "@/lib/site";
 import { homeJsonLd } from "@/lib/seo";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -96,10 +93,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <Navbar />
-        <main id="main">{children}</main>
-        <Footer />
-        <MobileCtaBar />
+        {children}
       </body>
     </html>
   );

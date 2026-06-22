@@ -6,7 +6,9 @@ import { Reveal } from "@/components/primitives/reveal";
 import { Atmosphere } from "@/components/primitives/atmosphere";
 import { meals } from "@/lib/content";
 
-export function Meals() {
+export function Meals({ menuImageUrl }: { menuImageUrl?: string }) {
+  const imageUrl = menuImageUrl || meals.menuImage || null;
+
   return (
     <section id="meals" className="relative overflow-hidden scroll-mt-24 bg-cream py-section">
       <Atmosphere tone="sage" flip />
@@ -39,10 +41,10 @@ export function Meals() {
 
           {/* Weekly menu */}
           <Reveal delay={0.1}>
-            {meals.menuImage ? (
+            {imageUrl ? (
               <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] bg-sand shadow-lift">
                 <Image
-                  src={meals.menuImage}
+                  src={imageUrl}
                   alt="The Munro Centre's current weekly menu, freshly prepared by KGF"
                   fill
                   sizes="(min-width:1024px) 45vw, 90vw"
