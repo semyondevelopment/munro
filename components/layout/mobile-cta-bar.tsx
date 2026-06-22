@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { Phone, CalendarHeart } from "lucide-react";
-import { site } from "@/lib/site";
+import type { ResolvedSite } from "@/lib/sanity/types";
 import { cn } from "@/lib/utils";
 
 /**
  * Sticky conversion bar on mobile — keeps "Call" and "Book a Tour" one tap
  * away at all times. Appears once the user scrolls past the hero.
  */
-export function MobileCtaBar() {
+export function MobileCtaBar({ site }: { site: ResolvedSite }) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {

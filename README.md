@@ -54,8 +54,10 @@ public/images/         The centre's own photography
 
 ## Editing content
 
-- **Copy:** `lib/content.ts`. **Business details (NAP, hours, OWNA, KGF):** `lib/site.ts` — must match your Google Business Profile exactly.
-- **Photography:** `lib/images.ts` maps slots to files in `/public/images`.
+Two ways to edit, and they work together:
+
+- **Sanity CMS (no code) — the everyday way.** Staff log in at **`/studio`** and edit all copy, images, rooms, educators, testimonials, FAQs, fees and contact details; published changes appear on the live site automatically. One-time setup (create the project + add Vercel env vars) is in **`docs/SANITY_SETUP.md`**; the plain-English staff guide is **`docs/EDITING_GUIDE.md`**.
+- **Code (defaults & fallback).** Until Sanity is connected — and as the built-in fallback for anything not yet entered there — content comes from `lib/content.ts` (copy), `lib/site.ts` (NAP, hours, OWNA, KGF) and `lib/images.ts` (photo slots → `/public/images`). Because of this fallback the site never renders blank, and deploying before Sanity is set up is always safe.
 
 ## SEO — built in (on-page / technical)
 

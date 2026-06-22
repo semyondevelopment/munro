@@ -17,33 +17,35 @@ import { Faq } from "@/components/sections/faq";
 import { FinalCta } from "@/components/sections/final-cta";
 import { BookTour } from "@/components/sections/book-tour";
 import { SoftDivider } from "@/components/primitives/soft-divider";
+import { getSiteContent } from "@/lib/sanity/get-content";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const c = await getSiteContent();
   return (
     <>
-      <Hero />
-      <TrustBar />
-      <About />
-      <Rooms />
-      <RoomFinder />
-      <Welcome />
-      <Features />
-      <Meals />
-      <DayAtMunro />
-      <Educators />
+      <Hero hero={c.hero} />
+      <TrustBar trustBar={c.trustBar} />
+      <About about={c.about} />
+      <Rooms rooms={c.rooms} />
+      <RoomFinder rooms={c.rooms} roomAgeMonths={c.roomAgeMonths} roomFinder={c.roomFinder} />
+      <Welcome welcome={c.welcome} />
+      <Features features={c.features} />
+      <Meals meals={c.meals} />
+      <DayAtMunro daySchedule={c.daySchedule} />
+      <Educators educators={c.educators} />
       <SoftDivider from="cream" to="sage" />
-      <Impact />
-      <Fees />
+      <Impact impact={c.impact} />
+      <Fees fees={c.fees} />
       <SoftDivider from="sage" to="cream" />
-      <Testimonials />
-      <VirtualTour />
+      <Testimonials testimonials={c.testimonials} />
+      <VirtualTour tour={c.tour} />
       <SoftDivider from="sand" to="navy" />
-      <Philosophy />
+      <Philosophy philosophy={c.philosophy} />
       <SoftDivider from="navy" to="cream" />
-      <Faq />
+      <Faq faq={c.faq} />
       <SoftDivider from="cream" to="navy" />
-      <FinalCta />
-      <BookTour />
+      <FinalCta finalCta={c.finalCta} site={c.site} />
+      <BookTour rooms={c.rooms} site={c.site} />
     </>
   );
 }

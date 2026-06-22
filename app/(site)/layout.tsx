@@ -3,15 +3,17 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import { ScrollProgress } from "@/components/layout/scroll-progress";
+import { getSiteContent } from "@/lib/sanity/get-content";
 
 /**
  * Layout for the public marketing site — adds the nav, footer and conversion
  * chrome. The Sanity Studio at /studio sits outside this group, so it renders
  * without any of the site furniture.
  */
-export default function SiteLayout({
+export default async function SiteLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const { site } = await getSiteContent();
   return (
     <>
       <script
@@ -26,10 +28,10 @@ export default function SiteLayout({
         Skip to content
       </a>
       <ScrollProgress />
-      <Navbar />
+      <Navbar site={site} />
       <main id="main">{children}</main>
-      <Footer />
-      <MobileCtaBar />
+      <Footer site={site} />
+      <MobileCtaBar site={site} />
     </>
   );
 }

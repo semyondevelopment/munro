@@ -3,11 +3,10 @@ import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
 import { Atmosphere } from "@/components/primitives/atmosphere";
-import { about } from "@/lib/content";
-import { img } from "@/lib/images";
+import type { AboutContent } from "@/lib/sanity/types";
 import { brandTile } from "@/lib/palette";
 
-export function About() {
+export function About({ about }: { about: AboutContent }) {
   return (
     <section id="about" className="relative overflow-hidden scroll-mt-24 bg-cream py-section">
       <Atmosphere tone="sage" />
@@ -26,7 +25,7 @@ export function About() {
 
         <ul className="mt-14 grid gap-x-7 gap-y-12 md:grid-cols-3">
           {about.pillars.map((pillar, i) => {
-            const image = img(pillar.image);
+            const image = pillar.image;
             return (
               <Reveal as="li" key={pillar.key} delay={i * 0.08}>
                 <div className="img-zoom relative aspect-[4/5] overflow-hidden rounded-[var(--radius)] bg-sand shadow-soft">

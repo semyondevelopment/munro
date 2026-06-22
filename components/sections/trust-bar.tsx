@@ -1,10 +1,10 @@
 import { Container } from "@/components/primitives/container";
 import { Reveal } from "@/components/primitives/reveal";
-import { trustBar } from "@/lib/content";
+import type { TrustBarContent } from "@/lib/sanity/types";
 import { iconMap } from "@/components/icon-map";
 import { brandTile } from "@/lib/palette";
 
-export function TrustBar() {
+export function TrustBar({ trustBar }: { trustBar: TrustBarContent }) {
   return (
     <section
       aria-label="Why families trust The Munro Centre"

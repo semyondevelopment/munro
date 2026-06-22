@@ -2,8 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // Photography is the centre's own, served locally from /public/images.
+    // The centre's own photography is served locally from /public/images;
+    // images uploaded through Sanity are served from the Sanity image CDN.
     formats: ["image/avif", "image/webp"],
+    remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
   },
 };
 

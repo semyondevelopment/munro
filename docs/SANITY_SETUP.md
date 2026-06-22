@@ -46,12 +46,23 @@ This uploads every photo in `/public/images` and creates the Homepage, Site
 settings, rooms, educators, testimonials, FAQs, features and trust-bar entries —
 so the Studio opens fully populated with the current site content.
 
-## 5. Wire the site to read from Sanity
+## 5. Turn on instant updates (recommended)
 
-Once content is in Sanity, the section components are switched from importing
-`lib/content.ts` to fetching via `lib/sanity/`. This is the final dev step —
-each section reads published content and revalidates on publish (a Sanity
-webhook → Vercel deploy hook, or Next `revalidateTag`). See `lib/sanity/`.
+The site **already reads published content from Sanity** — every section fetches
+through `lib/sanity/get-content.ts`, with an automatic fallback to the bundled
+content. No code changes are needed; edits appear within ~60 seconds on their
+own. To make them appear within a *second*, add a publish webhook:
+
+1. Choose a random secret and set it as `SANITY_REVALIDATE_SECRET` in
+   **Vercel → Settings → Environment Variables** (redeploy after adding it).
+2. In **Manage → API → Webhooks**, create a webhook:
+   - **URL:** `https://www.munrocentre.com/api/revalidate`
+   - **Dataset:** `production` · **Trigger on:** Create, Update, Delete
+   - **HTTP method:** POST · **API version:** `v2024-10-01`
+   - **Secret:** the same value as `SANITY_REVALIDATE_SECRET`
+
+On publish, Sanity calls the webhook and the homepage refreshes on the next
+visit. Without it, the 60-second time-based refresh still applies.
 
 ## 6. Hand over
 
@@ -61,6 +72,11 @@ webhook → Vercel deploy hook, or Next `revalidateTag`). See `lib/sanity/`.
 - Share `docs/EDITING_GUIDE.md` with them.
 
 ## Notes
-- `useCdn: true` keeps public reads fast and cached.
-- Never expose `SANITY_API_WRITE_TOKEN` to the browser (no `NEXT_PUBLIC_`).
+- Public content is fetched on the server and cached by Next.js (tagged + 60s
+  revalidation), so reads stay fast and update without a redeploy.
+- Never expose `SANITY_API_WRITE_TOKEN` or `SANITY_REVALIDATE_SECRET` to the
+  browser (no `NEXT_PUBLIC_` prefix).
 - The Studio is at `/studio` and is excluded from the marketing layout.
+- `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` must be set in
+  Vercel for production. Until they are, the live site renders the bundled
+  content — so deploying is always safe, even before Sanity is connected.

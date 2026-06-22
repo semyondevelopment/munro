@@ -13,7 +13,10 @@
  * Safe to re-run: it uses createOrReplace with stable ids (it will overwrite,
  * but re-upload images each time — run once unless you mean to reset).
  */
-import { createClient } from "@sanity/client";
+// `@sanity/client` isn't a direct dependency; next-sanity re-exports the same
+// `createClient` (and its entrypoint pulls in no `server-only`, so it runs fine
+// under tsx for this migration script).
+import { createClient } from "next-sanity";
 import { readFileSync } from "node:fs";
 import { join, basename } from "node:path";
 

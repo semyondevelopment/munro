@@ -6,13 +6,12 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Atmosphere } from "@/components/primitives/atmosphere";
-import { testimonials } from "@/lib/content";
+import type { TestimonialsContent } from "@/lib/sanity/types";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-const items = testimonials.items;
-
-export function Testimonials() {
+export function Testimonials({ testimonials }: { testimonials: TestimonialsContent }) {
+  const items = testimonials.items;
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState(1);
@@ -21,7 +20,7 @@ export function Testimonials() {
   const go = useCallback((step: number) => {
     setDir(step > 0 ? 1 : -1);
     setIndex((i) => (i + step + items.length) % items.length);
-  }, []);
+  }, [items.length]);
 
   const toIndex = useCallback(
     (i: number) => {

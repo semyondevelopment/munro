@@ -2,10 +2,10 @@ import { Quote } from "lucide-react";
 import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
-import { educators } from "@/lib/content";
+import type { EducatorsContent } from "@/lib/sanity/types";
 import { brandTile } from "@/lib/palette";
 
-export function Educators() {
+export function Educators({ educators }: { educators: EducatorsContent }) {
   return (
     <section id="team" className="scroll-mt-24 bg-cream py-section">
       <Container>

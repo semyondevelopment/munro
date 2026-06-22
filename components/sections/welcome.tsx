@@ -1,6 +1,6 @@
 import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
-import { welcome } from "@/lib/content";
+import type { WelcomeContent } from "@/lib/sanity/types";
 import { cn } from "@/lib/utils";
 
 const pillTones = [
@@ -11,7 +11,7 @@ const pillTones = [
   "bg-cream text-navy",
 ];
 
-export function Welcome() {
+export function Welcome({ welcome }: { welcome: WelcomeContent }) {
   return (
     <section
       id="welcome"

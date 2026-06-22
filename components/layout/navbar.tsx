@@ -6,10 +6,10 @@ import { Menu, X, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { nav } from "@/lib/content";
-import { site } from "@/lib/site";
+import type { ResolvedSite } from "@/lib/sanity/types";
 import { cn } from "@/lib/utils";
 
-export function Navbar() {
+export function Navbar({ site }: { site: ResolvedSite }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 

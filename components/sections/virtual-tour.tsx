@@ -12,11 +12,9 @@ import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
 import { Atmosphere } from "@/components/primitives/atmosphere";
-import { tour } from "@/lib/content";
-import { img } from "@/lib/images";
+import type { TourContent } from "@/lib/sanity/types";
 import { cn } from "@/lib/utils";
 
-const gallery = tour.gallery;
 const aspects = [
   "aspect-[4/5]",
   "aspect-[4/3]",
@@ -26,7 +24,8 @@ const aspects = [
   "aspect-[4/5]",
 ];
 
-export function VirtualTour() {
+export function VirtualTour({ tour }: { tour: TourContent }) {
+  const gallery = tour.gallery;
   const [openAt, setOpenAt] = useState<number | null>(null);
   const open = openAt !== null;
 
@@ -35,7 +34,7 @@ export function VirtualTour() {
       setOpenAt((i) =>
         i === null ? i : (i + delta + gallery.length) % gallery.length,
       ),
-    [],
+    [gallery.length],
   );
 
   useEffect(() => {
@@ -49,7 +48,7 @@ export function VirtualTour() {
   }, [open, step]);
 
   const active = openAt !== null ? gallery[openAt] : null;
-  const activeImg = active ? img(active.image) : null;
+  const activeImg = active ? active.image : null;
 
   return (
     <section className="relative overflow-hidden bg-sand py-section">
@@ -71,10 +70,10 @@ export function VirtualTour() {
         <Reveal className="mt-12">
           <div className="gap-4 [column-fill:_balance] sm:columns-2 lg:columns-3">
             {gallery.map((item, i) => {
-              const image = img(item.image);
+              const image = item.image;
               return (
                 <button
-                  key={item.image}
+                  key={`${item.caption}-${i}`}
                   type="button"
                   onClick={() => setOpenAt(i)}
                   aria-label={`Open ${item.caption}`}

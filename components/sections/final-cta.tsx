@@ -4,12 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
-import { finalCta } from "@/lib/content";
-import { img } from "@/lib/images";
-import { site } from "@/lib/site";
+import type { FinalCtaContent, ResolvedSite } from "@/lib/sanity/types";
 
-export function FinalCta() {
-  const image = img(finalCta.image);
+export function FinalCta({ finalCta, site }: { finalCta: FinalCtaContent; site: ResolvedSite }) {
+  const image = finalCta.image;
   const lines = finalCta.title.split("\n");
 
   return (

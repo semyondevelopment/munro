@@ -1,10 +1,10 @@
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { Container } from "@/components/primitives/container";
-import { site } from "@/lib/site";
 import { footer } from "@/lib/content";
+import type { ResolvedSite } from "@/lib/sanity/types";
 
-export function Footer() {
+export function Footer({ site }: { site: ResolvedSite }) {
   const year = 2026;
 
   return (

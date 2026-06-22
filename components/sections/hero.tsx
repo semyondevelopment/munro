@@ -3,12 +3,11 @@ import { Phone, Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/primitives/container";
 import { Reveal } from "@/components/primitives/reveal";
-import { hero } from "@/lib/content";
-import { img } from "@/lib/images";
+import type { HeroContent } from "@/lib/sanity/types";
 
-export function Hero() {
-  const image = img(hero.image);
-  const secondary = img(hero.imageSecondary);
+export function Hero({ hero }: { hero: HeroContent }) {
+  const image = hero.image;
+  const secondary = hero.imageSecondary;
   const lines = hero.title.split("\n");
 
   return (
