@@ -1,24 +1,17 @@
 /**
- * One-off migration: copies the bundled static content (lib/content.ts,
- * lib/site.ts, lib/images.ts) into the centre's Sanity dataset, including
- * uploading every photo from /public/images.
+ * Content migration: copies the bundled static content (lib/content.ts,
+ * lib/site.ts, lib/images.ts) into the centre's Sanity dataset, including the
+ * site photos. Idempotent — it uses createOrReplace with stable ids, so running
+ * it again simply resets those documents to the bundled defaults.
  *
- * Run AFTER creating the Sanity project and setting env vars:
- *
- *   NEXT_PUBLIC_SANITY_PROJECT_ID=xxxx \
- *   NEXT_PUBLIC_SANITY_DATASET=production \
- *   SANITY_API_WRITE_TOKEN=sk... \
- *   npm run seed
- *
- * Safe to re-run: it uses createOrReplace with stable ids (it will overwrite,
- * but re-upload images each time — run once unless you mean to reset).
+ * Editors never run this. It is a one-time setup step, available two ways:
+ *   - Browser (no terminal): set SANITY_SEED_SECRET, deploy, and POST
+ *     /api/seed (see app/api/seed/route.ts).
+ *   - Terminal: `npm run seed` (see sanity/migrate/cli.ts).
  */
-// `@sanity/client` isn't a direct dependency; next-sanity re-exports the same
-// `createClient` (and its entrypoint pulls in no `server-only`, so it runs fine
-// under tsx for this migration script).
-import { createClient } from "next-sanity";
 import { readFileSync } from "node:fs";
 import { join, basename } from "node:path";
+import { createClient } from "next-sanity";
 
 import { site } from "../../lib/site";
 import { images, type ImageKey } from "../../lib/images";
@@ -43,64 +36,76 @@ import {
   finalCta,
 } from "../../lib/content";
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
-const token = process.env.SANITY_API_WRITE_TOKEN;
-
-if (!projectId || !token) {
-  console.error(
-    "Missing env. Set NEXT_PUBLIC_SANITY_PROJECT_ID and SANITY_API_WRITE_TOKEN.",
-  );
-  process.exit(1);
+export interface SeedConfig {
+  projectId: string;
+  dataset: string;
+  token: string;
+  /**
+   * Origin of the running site (e.g. https://www.munrocentre.com). When the
+   * photos aren't on the local filesystem (serverless), they're fetched from
+   * `${origin}${src}` instead. Omitted for the local CLI run.
+   */
+  origin?: string;
 }
 
-const client = createClient({
-  projectId,
-  dataset,
-  token,
-  apiVersion: "2024-10-01",
-  useCdn: false,
-});
+export interface SeedResult {
+  uploaded: number;
+  warnings: string[];
+}
 
 let keyCounter = 0;
 const key = () => `k${(keyCounter++).toString(36)}`;
 const withKeys = <T extends object>(arr: T[]) => arr.map((o) => ({ _key: key(), ...o }));
 const id = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-/** Upload every site image once, returning a key -> asset id map. */
-async function uploadImages() {
-  const map = new Map<ImageKey, string>();
+/** Read image bytes from the bundled /public folder, falling back to the origin. */
+async function loadImageBytes(src: string, origin?: string): Promise<Buffer> {
+  try {
+    return readFileSync(join(process.cwd(), "public", src));
+  } catch {
+    if (!origin) throw new Error(`image not found on disk: ${src}`);
+    const res = await fetch(new URL(src, origin));
+    if (!res.ok) throw new Error(`could not fetch ${src} (HTTP ${res.status})`);
+    return Buffer.from(await res.arrayBuffer());
+  }
+}
+
+/** Run the content + image migration into Sanity. Safe to call repeatedly. */
+export async function runSeed(config: SeedConfig): Promise<SeedResult> {
+  keyCounter = 0;
+  const warnings: string[] = [];
+
+  const client = createClient({
+    projectId: config.projectId,
+    dataset: config.dataset || "production",
+    token: config.token,
+    apiVersion: "2024-10-01",
+    useCdn: false,
+  });
+
+  // ---- Upload every site image once → key -> asset id ----
+  const assets = new Map<ImageKey, string>();
   for (const k of Object.keys(images) as ImageKey[]) {
     const { src } = images[k];
     try {
-      const buf = readFileSync(join(process.cwd(), "public", src));
-      const asset = await client.assets.upload("image", buf, {
-        filename: basename(src),
-      });
-      map.set(k, asset._id);
-      console.log(`  uploaded ${src}`);
+      const buf = await loadImageBytes(src, config.origin);
+      const asset = await client.assets.upload("image", buf, { filename: basename(src) });
+      assets.set(k, asset._id);
     } catch (e) {
-      console.warn(`  ! could not upload ${src} (${(e as Error).message})`);
+      warnings.push(`could not upload ${src}: ${(e as Error).message}`);
     }
   }
-  return map;
-}
 
-const imageField = (assets: Map<ImageKey, string>, k: ImageKey) => {
-  const ref = assets.get(k);
-  return ref
-    ? { _type: "imageWithAlt", alt: images[k].alt, asset: { _type: "reference", _ref: ref } }
-    : undefined;
-};
+  const imageField = (k: ImageKey) => {
+    const ref = assets.get(k);
+    return ref
+      ? { _type: "imageWithAlt", alt: images[k].alt, asset: { _type: "reference", _ref: ref } }
+      : undefined;
+  };
 
-async function run() {
-  console.log("Uploading images…");
-  const assets = await uploadImages();
-
-  console.log("Writing documents…");
+  // ---- Documents ----
   const tx = client.transaction();
 
-  // ---- Site settings ----
   tx.createOrReplace({
     _id: "siteSettings",
     _type: "siteSettings",
@@ -116,7 +121,6 @@ async function run() {
     acknowledgement: site.acknowledgement,
   });
 
-  // ---- Homepage ----
   tx.createOrReplace({
     _id: "homePage",
     _type: "homePage",
@@ -126,8 +130,8 @@ async function run() {
     heroPrimaryCta: { _type: "cta", ...hero.primaryCta },
     heroSecondaryCta: { _type: "cta", ...hero.secondaryCta },
     heroHighlights: hero.highlights,
-    heroImage: imageField(assets, hero.image),
-    heroImageSecondary: imageField(assets, hero.imageSecondary),
+    heroImage: imageField(hero.image),
+    heroImageSecondary: imageField(hero.imageSecondary),
 
     aboutEyebrow: about.eyebrow,
     aboutTitle: about.title,
@@ -136,7 +140,7 @@ async function run() {
       _key: key(),
       name: p.name,
       copy: p.copy,
-      image: imageField(assets, p.image),
+      image: imageField(p.image),
     })),
 
     welcomeEyebrow: welcome.eyebrow,
@@ -163,7 +167,7 @@ async function run() {
     impactCopy: impact.copy,
     impactPoints: impact.points,
     impactStats: withKeys(impact.stats.map((s) => ({ ...s }))),
-    impactImage: imageField(assets, impact.image),
+    impactImage: imageField(impact.image),
 
     feesEyebrow: fees.eyebrow,
     feesTitle: fees.title,
@@ -181,7 +185,7 @@ async function run() {
     tourCopy: tour.copy,
     tourGallery: tour.gallery.map((g) => ({
       _key: key(),
-      image: imageField(assets, g.image),
+      image: imageField(g.image),
       caption: g.caption,
     })),
 
@@ -193,10 +197,9 @@ async function run() {
     finalCtaEyebrow: finalCta.eyebrow,
     finalCtaTitle: finalCta.title,
     finalCtaCopy: finalCta.copy,
-    finalCtaImage: imageField(assets, finalCta.image),
+    finalCtaImage: imageField(finalCta.image),
   });
 
-  // ---- Collections ----
   rooms.items.forEach((r, i) => {
     const b = roomAgeMonths[r.key];
     tx.createOrReplace({
@@ -208,7 +211,7 @@ async function run() {
       minMonths: b?.min,
       maxMonths: b?.max,
       copy: r.copy,
-      image: imageField(assets, r.image),
+      image: imageField(r.image),
       order: i,
     });
   });
@@ -265,10 +268,5 @@ async function run() {
   });
 
   await tx.commit();
-  console.log("✓ Seed complete.");
+  return { uploaded: assets.size, warnings };
 }
-
-run().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});

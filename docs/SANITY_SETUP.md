@@ -23,7 +23,8 @@ same variables in **Vercel → Project → Settings → Environment Variables**:
 NEXT_PUBLIC_SANITY_PROJECT_ID=<your project id>
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2024-10-01
-SANITY_API_WRITE_TOKEN=<editor token>   # local only, for seeding
+SANITY_API_WRITE_TOKEN=<editor token>    # for the one-time import (step 4)
+SANITY_SEED_SECRET=<any random string>   # for the one-time import (step 4)
 ```
 
 Create the write token in **Manage → API → Tokens** with **Editor** permission.
@@ -34,17 +35,23 @@ In **Manage → API → CORS origins**, add:
 - `http://localhost:3000` (dev)
 - your production URL, e.g. `https://www.munrocentre.com`
 
-## 4. Migrate the existing content + images
+## 4. Import the current content + images (one-time, in the browser)
 
-With the env vars set locally, run once:
+So the Studio opens fully populated rather than blank, import the current site
+content once. **No terminal needed:**
 
-```bash
-npm run seed
-```
+1. Make sure `SANITY_API_WRITE_TOKEN` (an Editor token from **Manage → API →
+   Tokens**) and `SANITY_SEED_SECRET` (any random string) are set in **Vercel →
+   Settings → Environment Variables**, and redeploy.
+2. Open `https://www.munrocentre.com/api/seed?secret=<your-secret>` and click
+   **Run import**. It uploads every photo and creates the Homepage, Site
+   settings, rooms, educators, testimonials, FAQs, features and trust-bar
+   entries.
+3. When it reports success, **remove `SANITY_SEED_SECRET`** (and, if you like,
+   the write token) from Vercel — with no secret set, the import route is
+   permanently disabled.
 
-This uploads every photo in `/public/images` and creates the Homepage, Site
-settings, rooms, educators, testimonials, FAQs, features and trust-bar entries —
-so the Studio opens fully populated with the current site content.
+> Prefer a terminal? `SANITY_API_WRITE_TOKEN=… npm run seed` does the same thing.
 
 ## 5. Turn on instant updates (recommended)
 
