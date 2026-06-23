@@ -4,9 +4,9 @@ import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
 import { Atmosphere } from "@/components/primitives/atmosphere";
-import { meals } from "@/lib/content";
+import type { MealsContent } from "@/lib/sanity/types";
 
-export function Meals() {
+export function Meals({ meals }: { meals: MealsContent }) {
   return (
     <section id="meals" className="relative overflow-hidden scroll-mt-24 bg-cream py-section">
       <Atmosphere tone="green" flip />
@@ -42,8 +42,8 @@ export function Meals() {
             {meals.menuImage ? (
               <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-lg)] bg-sand shadow-lift">
                 <Image
-                  src={meals.menuImage}
-                  alt="The Munro Centre's current weekly menu, freshly prepared by KGF"
+                  src={meals.menuImage.src}
+                  alt={meals.menuImage.alt}
                   fill
                   sizes="(min-width:1024px) 45vw, 90vw"
                   className="object-cover"

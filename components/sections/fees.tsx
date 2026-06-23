@@ -6,7 +6,7 @@ import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
 import { Button } from "@/components/ui/button";
-import { fees } from "@/lib/content";
+import type { FeesContent } from "@/lib/sanity/types";
 
 const pointIcons = [HeartHandshake, PiggyBank, ReceiptText];
 
@@ -24,7 +24,7 @@ function ccsRate(income: number): number {
 const fmt = (n: number) =>
   n.toLocaleString("en-AU", { style: "currency", currency: "AUD", maximumFractionDigits: 0 });
 
-export function Fees() {
+export function Fees({ fees }: { fees: FeesContent }) {
   const [income, setIncome] = useState(120_000);
   const [days, setDays] = useState(3);
   const [dailyFee, setDailyFee] = useState(fees.estimator.sampleDailyFee);

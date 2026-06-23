@@ -1,9 +1,9 @@
 import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
-import { philosophy } from "@/lib/content";
+import type { PhilosophyContent } from "@/lib/sanity/types";
 
-export function Philosophy() {
+export function Philosophy({ philosophy }: { philosophy: PhilosophyContent }) {
   return (
     <section id="philosophy" className="scroll-mt-24 bg-navy py-section">
       <Container size="narrow" className="relative z-[2] text-center">

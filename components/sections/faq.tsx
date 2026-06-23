@@ -10,9 +10,9 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { faq } from "@/lib/content";
+import type { FaqContent } from "@/lib/sanity/types";
 
-export function Faq() {
+export function Faq({ faq }: { faq: FaqContent }) {
   return (
     <Section id="faq" tone="cream" className="relative overflow-hidden scroll-mt-24">
       <Atmosphere tone="green" />

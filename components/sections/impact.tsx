@@ -4,13 +4,12 @@ import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
 import { Button } from "@/components/ui/button";
-import { impact } from "@/lib/content";
-import { img } from "@/lib/images";
+import type { ImpactContent } from "@/lib/sanity/types";
 import { cn } from "@/lib/utils";
 import { CountUp } from "@/components/primitives/count-up";
 
-export function Impact() {
-  const image = img(impact.image);
+export function Impact({ impact }: { impact: ImpactContent }) {
+  const image = impact.image;
 
   return (
     <section id="not-for-profit" className="scroll-mt-24 bg-sage-100 py-section">

@@ -7,8 +7,7 @@ import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Atmosphere } from "@/components/primitives/atmosphere";
 import { Button } from "@/components/ui/button";
-import { rooms, roomAgeMonths, roomFinder } from "@/lib/content";
-import { img } from "@/lib/images";
+import type { RoomsContent, RoomAgeMonths, RoomFinderContent } from "@/lib/sanity/types";
 import { brandTile } from "@/lib/palette";
 import { cn } from "@/lib/utils";
 
@@ -23,7 +22,7 @@ function ageLabel(months: number) {
   return m ? `${yr} ${m} mo` : yr;
 }
 
-export function RoomFinder() {
+export function RoomFinder({ rooms, roomAgeMonths, roomFinder }: { rooms: RoomsContent; roomAgeMonths: RoomAgeMonths; roomFinder: RoomFinderContent }) {
   const [months, setMonths] = useState(20);
 
   const matches = useMemo(
@@ -32,12 +31,12 @@ export function RoomFinder() {
         const b = roomAgeMonths[r.key];
         return b && months >= b.min && months <= b.max;
       }),
-    [months],
+    [months, rooms, roomAgeMonths],
   );
 
   // Index of the best (first) match, for the highlighted hero card.
   const best = matches[0];
-  const bestImg = best ? img(best.image) : null;
+  const bestImg = best ? best.image : null;
 
   return (
     <section

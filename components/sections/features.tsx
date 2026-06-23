@@ -1,11 +1,11 @@
 import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
-import { features } from "@/lib/content";
+import type { FeaturesContent } from "@/lib/sanity/types";
 import { iconMap } from "@/components/icon-map";
 import { brandTile } from "@/lib/palette";
 
-export function Features() {
+export function Features({ features }: { features: FeaturesContent }) {
   return (
     <section className="bg-sand py-section">
       <Container>

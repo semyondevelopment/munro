@@ -3,11 +3,6 @@ import { Baloo_2, Inter } from "next/font/google";
 import "./globals.css";
 
 import { site } from "@/lib/site";
-import { homeJsonLd } from "@/lib/seo";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
-import { ScrollProgress } from "@/components/layout/scroll-progress";
 
 // Friendly, rounded display face for headings — warm and playful, the right
 // register for an early-learning centre while staying clean and legible.
@@ -86,24 +81,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-AU" className={`${display.variable} ${sans.variable}`}>
-      <body className="min-h-dvh antialiased">
-        <script
-          type="application/ld+json"
-          // JSON-LD is trusted, build-time content (no user input).
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd()) }}
-        />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-navy focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-cream"
-        >
-          Skip to content
-        </a>
-        <ScrollProgress />
-        <Navbar />
-        <main id="main">{children}</main>
-        <Footer />
-        <MobileCtaBar />
-      </body>
+      <body className="min-h-dvh antialiased">{children}</body>
     </html>
   );
 }

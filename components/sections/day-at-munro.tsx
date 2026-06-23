@@ -1,10 +1,10 @@
 import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
-import { daySchedule } from "@/lib/content";
+import type { DayContent } from "@/lib/sanity/types";
 import { brandTiles } from "@/lib/palette";
 
-export function DayAtMunro() {
+export function DayAtMunro({ daySchedule }: { daySchedule: DayContent }) {
   return (
     <section className="bg-sand py-section">
       <Container>

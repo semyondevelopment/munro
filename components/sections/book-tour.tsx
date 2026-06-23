@@ -7,8 +7,7 @@ import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
 import { Button } from "@/components/ui/button";
 import { submitTour, type TourState } from "@/app/actions";
-import { rooms } from "@/lib/content";
-import { site } from "@/lib/site";
+import type { RoomsContent, ResolvedSite } from "@/lib/sanity/types";
 import { cn } from "@/lib/utils";
 
 const expect = [
@@ -18,14 +17,10 @@ const expect = [
   "No pressure — just come and feel it",
 ];
 
-const ageOptions = [
-  ...rooms.items.map((r) => `${r.name} · ${r.age}`),
-  "Not sure yet",
-];
-
 const timeOptions = ["Morning", "Midday", "Afternoon", "Either works"];
 
-export function BookTour() {
+export function BookTour({ rooms, site }: { rooms: RoomsContent; site: ResolvedSite }) {
+  const ageOptions = [...rooms.items.map((r) => `${r.name} · ${r.age}`), "Not sure yet"];
   const [state, formAction, pending] = useActionState<TourState, FormData>(
     submitTour,
     null,

@@ -4,11 +4,10 @@ import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
 import { Atmosphere } from "@/components/primitives/atmosphere";
-import { rooms } from "@/lib/content";
-import { img } from "@/lib/images";
+import type { RoomsContent } from "@/lib/sanity/types";
 import { brandTile } from "@/lib/palette";
 
-export function Rooms() {
+export function Rooms({ rooms }: { rooms: RoomsContent }) {
   return (
     <section id="rooms" className="relative overflow-hidden scroll-mt-24 bg-sand py-section">
       <Atmosphere tone="yellow" flip />
@@ -27,7 +26,7 @@ export function Rooms() {
 
         <ul className="mt-14 grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {rooms.items.map((room, i) => {
-            const image = img(room.image);
+            const image = room.image;
             return (
               <Reveal as="li" key={room.key} delay={(i % 3) * 0.08}>
                 <a href="#book" className="group block">
