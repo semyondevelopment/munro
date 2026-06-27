@@ -3,6 +3,7 @@ import { Baloo_2, Inter } from "next/font/google";
 import "./globals.css";
 
 import { site } from "@/lib/site";
+import { getSiteContent } from "@/lib/sanity/get-content";
 
 // Friendly, rounded display face for headings — warm and playful, the right
 // register for an early-learning centre while staying clean and legible.
@@ -19,56 +20,64 @@ const sans = Inter({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: `${site.name} | Early Learning & Childcare in St Lucia, Brisbane`,
-    template: `%s | ${site.name}`,
-  },
-  description: site.description,
-  keywords: [...site.keywords],
-  applicationName: site.name,
-  authors: [{ name: site.name }],
-  creator: site.name,
-  publisher: site.name,
-  category: "Education",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_AU",
-    url: site.url,
-    siteName: site.name,
-    title: `${site.name} | Early Learning & Childcare in St Lucia, Brisbane`,
-    description: site.ogDescription,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${site.name} | Early Learning in St Lucia, Brisbane`,
-    description: site.ogDescription,
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+export async function generateMetadata(): Promise<Metadata> {
+  // The centre name flows from the CMS (falling back to the bundled value); the
+  // rest of the SEO copy stays authoritative in lib/site.ts for NAP consistency.
+  const { site: cms } = await getSiteContent();
+  const name = cms.name;
+  return {
+    metadataBase: new URL(site.url),
+    title: {
+      default: `${name} | Early Learning & Childcare in St Lucia, Brisbane`,
+      template: `%s | ${name}`,
+    },
+    description: site.description,
+    keywords: [...site.keywords],
+    applicationName: name,
+    authors: [{ name }],
+    creator: name,
+    publisher: name,
+    category: "Education",
+    alternates: {
+      canonical: "/",
+    },
+    openGraph: {
+      type: "website",
+      locale: "en_AU",
+      url: site.url,
+      siteName: name,
+      title: `${name} | Early Learning & Childcare in St Lucia, Brisbane`,
+      description: site.ogDescription,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${name} | Early Learning in St Lucia, Brisbane`,
+      description: site.ogDescription,
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
     },
-  },
-  formatDetection: { telephone: true, address: true, email: true },
-  other: {
-    "geo.region": "AU-QLD",
-    "geo.placename": "St Lucia, Brisbane",
-    "geo.position": `${site.geo.latitude};${site.geo.longitude}`,
-    ICBM: `${site.geo.latitude}, ${site.geo.longitude}`,
-  },
-  // Add your Google Search Console token here before launch:
-  // verification: { google: "..." },
-};
+    formatDetection: { telephone: true, address: true, email: true },
+    other: {
+      "geo.region": "AU-QLD",
+      "geo.placename": "St Lucia, Brisbane",
+      "geo.position": `${site.geo.latitude};${site.geo.longitude}`,
+      ICBM: `${site.geo.latitude}, ${site.geo.longitude}`,
+    },
+    // Set GOOGLE_SITE_VERIFICATION in the environment to verify Search Console.
+    verification: process.env.GOOGLE_SITE_VERIFICATION
+      ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+      : undefined,
+  };
+}
 
 export const viewport: Viewport = {
   themeColor: "#11253f",
