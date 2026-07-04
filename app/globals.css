@@ -198,6 +198,16 @@
     animation: munro-wiggle 0.55s ease-in-out;
   }
 
+  /* Soft dot-grid texture for large calm surfaces (hero). Pair with a
+     mask-image so it fades out instead of ending on a hard edge. */
+  .dot-grid {
+    background-image: radial-gradient(
+      color-mix(in oklab, var(--color-navy) 12%, transparent) 1.2px,
+      transparent 1.2px
+    );
+    background-size: 22px 22px;
+  }
+
   /* Fine top hairline used to separate editorial blocks */
   .rule {
     height: 1px;

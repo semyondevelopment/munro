@@ -5,7 +5,7 @@ import { footer } from "@/lib/content";
 import type { ResolvedSite } from "@/lib/sanity/types";
 
 export function Footer({ site }: { site: ResolvedSite }) {
-  const year = 2026;
+  const year = new Date().getFullYear();
 
   return (
     <footer

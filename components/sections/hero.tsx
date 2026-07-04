@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Phone, Check, Sparkles } from "lucide-react";
+import { Phone, Check, Sparkles, Sparkle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/primitives/container";
 import { Reveal } from "@/components/primitives/reveal";
@@ -13,9 +13,9 @@ export function Hero({ hero }: { hero: HeroContent }) {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-cream pb-16 pt-28 sm:pb-20 lg:pb-28 lg:pt-36"
+      className="relative overflow-hidden bg-cream pb-24 pt-28 sm:pb-28 lg:pb-32 lg:pt-36"
     >
-      {/* Atmospheric brand accents */}
+      {/* Atmospheric brand washes — layered for depth */}
       <div
         aria-hidden
         className="pointer-events-none absolute -right-32 -top-24 size-[36rem] rounded-full bg-sage-100 blur-3xl"
@@ -23,6 +23,16 @@ export function Hero({ hero }: { hero: HeroContent }) {
       <div
         aria-hidden
         className="pointer-events-none absolute -bottom-40 -left-24 size-[28rem] rounded-full bg-terracotta-100/60 blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/3 top-1/2 size-[24rem] -translate-x-1/2 -translate-y-1/3 rounded-full bg-brand-blue-100/40 blur-3xl"
+      />
+
+      {/* Soft dot-grid texture behind the copy, fading towards the centre */}
+      <div
+        aria-hidden
+        className="dot-grid pointer-events-none absolute inset-y-0 left-0 hidden w-[52%] opacity-70 [mask-image:radial-gradient(68%_62%_at_32%_40%,black,transparent)] sm:block"
       />
 
       {/* Playful floating shapes */}
@@ -33,13 +43,18 @@ export function Hero({ hero }: { hero: HeroContent }) {
       />
       <span
         aria-hidden
-        className="animate-float pointer-events-none absolute right-[6%] top-44 hidden size-6 rounded-lg bg-brand-blue/40 sm:block lg:right-[42%]"
+        className="animate-float pointer-events-none absolute right-[6%] top-44 hidden size-7 rounded-full border-[3px] border-brand-blue/40 sm:block lg:right-[42%]"
         style={{ animationDelay: "1.4s" }}
       />
       <span
         aria-hidden
-        className="animate-float pointer-events-none absolute bottom-24 left-[40%] hidden size-3 rounded-full bg-brand-red/50 sm:block"
+        className="animate-float pointer-events-none absolute bottom-28 left-[40%] hidden size-3 rounded-full bg-brand-red/50 sm:block"
         style={{ animationDelay: "2.1s" }}
+      />
+      <span
+        aria-hidden
+        className="animate-float pointer-events-none absolute bottom-48 left-[4%] hidden size-5 rotate-12 rounded-[6px] bg-brand-green/35 lg:block"
+        style={{ animationDelay: "3s" }}
       />
 
       <Container className="relative">
@@ -116,14 +131,34 @@ export function Hero({ hero }: { hero: HeroContent }) {
 
           {/* Image collage */}
           <div className="relative">
-            <Reveal className="img-zoom relative mx-auto aspect-[5/4] w-full max-w-md overflow-hidden rounded-[1.75rem] bg-sand shadow-hero sm:aspect-[4/5] lg:ml-auto lg:max-w-none lg:rounded-[2rem]">
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                priority
-                sizes="(min-width:1024px) 44vw, 90vw"
-                className="object-cover"
+            <Reveal className="relative mx-auto w-full max-w-md lg:ml-auto lg:max-w-none">
+              {/* Tilted colour tile + hand-drawn ring — grounding depth layers
+                  that peek out from behind the photo. Purely decorative. */}
+              <div
+                aria-hidden
+                className="absolute -inset-2 -rotate-2 rounded-[2rem] bg-brand-yellow-200/70 sm:-inset-3 lg:rounded-[2.5rem]"
+              />
+              <div
+                aria-hidden
+                className="absolute -left-6 -top-6 size-12 rounded-full border-[3px] border-dashed border-brand-blue/50"
+              />
+
+              <div className="img-zoom relative aspect-[5/4] w-full overflow-hidden rounded-[1.75rem] bg-sand shadow-hero sm:aspect-[4/5] lg:rounded-[2rem]">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  priority
+                  sizes="(min-width:1024px) 44vw, 90vw"
+                  className="object-cover"
+                />
+              </div>
+
+              {/* Small sticker-style sparkle on the photo's corner */}
+              <Sparkle
+                aria-hidden
+                className="absolute -bottom-4 right-10 size-9 rotate-12 fill-brand-yellow text-brand-yellow drop-shadow-sm"
+                strokeWidth={1}
               />
             </Reveal>
 
@@ -161,7 +196,7 @@ export function Hero({ hero }: { hero: HeroContent }) {
                 where the overlapping collage cards are hidden. */}
             <Reveal
               delay={0.4}
-              className="mt-4 flex justify-center sm:hidden"
+              className="mt-6 flex justify-center sm:hidden"
             >
               <span className="inline-flex items-center gap-2 rounded-pill bg-cream px-4 py-2 text-sm font-medium text-navy shadow-soft ring-1 ring-navy/5">
                 <Sparkles className="size-4 text-brand-green-deep" strokeWidth={1.9} />
@@ -171,6 +206,20 @@ export function Hero({ hero }: { hero: HeroContent }) {
           </div>
         </div>
       </Container>
+
+      {/* Gentle wave into the trust bar below (bg-sand) — melts the hard seam */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0">
+        <svg
+          viewBox="0 0 1440 56"
+          preserveAspectRatio="none"
+          className="block h-8 w-full text-sand sm:h-12 lg:h-14"
+        >
+          <path
+            d="M0,56 L0,34 C220,6 470,0 720,14 C970,28 1220,50 1440,22 L1440,56 Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
     </section>
   );
 }
