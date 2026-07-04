@@ -5,10 +5,15 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
+import { Stars } from "@/components/primitives/stars";
 import { Atmosphere } from "@/components/primitives/atmosphere";
 import type { TestimonialsContent } from "@/lib/sanity/types";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+
+/** Opens the centre's Google listing, where families read + leave reviews. */
+const GOOGLE_REVIEWS_URL =
+  "https://www.google.com/maps/search/?api=1&query=The%20Munro%20Centre%20St%20Lucia%20QLD%204067";
 
 export function Testimonials({ testimonials }: { testimonials: TestimonialsContent }) {
   const items = testimonials.items;
@@ -56,11 +61,19 @@ export function Testimonials({ testimonials }: { testimonials: TestimonialsConte
         <h2 className="mt-6 font-display text-[clamp(2.25rem,4.5vw,3.5rem)] leading-tight">
           {testimonials.title}
         </h2>
+        <a
+          href={GOOGLE_REVIEWS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link-underline mt-5 inline-block text-sm font-medium text-ink-soft transition-colors hover:text-navy"
+        >
+          Real reviews from our families — read them on Google
+        </a>
 
-        <div className="relative mt-12 min-h-[18rem] sm:min-h-[15rem]" aria-live="polite">
+        <div className="relative mt-12 min-h-[20rem] sm:min-h-[16rem]" aria-live="polite">
           <span
             aria-hidden
-            className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 select-none font-display text-[10rem] leading-none text-brand-yellow/40"
+            className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 select-none font-display text-[10rem] leading-none text-brand-yellow/20"
           >
             &ldquo;
           </span>
@@ -78,6 +91,7 @@ export function Testimonials({ testimonials }: { testimonials: TestimonialsConte
               transition={{ duration: 0.55, ease: EASE_OUT_EXPO }}
               className="relative flex flex-col items-center"
             >
+              <Stars value={5} className="mb-6" starClassName="size-5" />
               <blockquote className="font-display text-[clamp(1.6rem,3vw,2.4rem)] font-medium leading-snug text-navy">
                 {active.quote}
               </blockquote>

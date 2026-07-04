@@ -242,25 +242,60 @@ export const impact = {
 export const testimonials = {
   eyebrow: "From our families",
   title: "Loved by St Lucia families",
-  // PLACEHOLDER sentiment — replace with real, attributed reviews before launch.
+  /**
+   * Real Google reviews from Munro families — lightly trimmed to complete
+   * sentences, with obvious typos and US spellings normalised (no wording
+   * invented). Every one shown here reads as a 5-star review. Update here or in
+   * the CMS as new reviews come in.
+   */
   items: [
     {
       quote:
-        "The Munro Centre feels like family. Our daughter runs in smiling every morning — and as a parent, that's everything.",
-      name: "A Munro family",
-      detail: "St Lucia",
+        "We've just left the Munro Centre after about 5 years in total with our two children, who both loved their time there. It's a great place for families, with wonderful educators and management who strike the right balance between care and professionalism.",
+      name: "Tyler Riordan",
+      detail: "Parent of two · 5 years at Munro",
     },
     {
       quote:
-        "The educators truly know our son — his moods, his words, what makes him laugh. That kind of genuine care is rare.",
-      name: "A Munro family",
-      detail: "Toowong",
+        "My daughter has been attending the Munro Centre since she was 6 months old — at first just a few days a week, and now full time. She absolutely loves all the staff and children there, and it has been amazing watching her community grow.",
+      name: "Marina Burgin",
+      detail: "Parent · St Lucia",
     },
     {
       quote:
-        "Knowing it's not-for-profit and every dollar goes back into the children gave us real peace of mind from the first tour.",
-      name: "A Munro family",
-      detail: "Indooroopilly",
+        "So happy to have found this place for my child's care. Staff are welcoming and lovely, the place is well set up, the program excellent and communication great. It's a small centre, so lots of individual attention — my daughter loves it so much that half the time she runs away when I go to pick her up!",
+      name: "Claudia Jade",
+      detail: "Parent · St Lucia",
+    },
+    {
+      quote:
+        "A great daycare centre, especially for kids 3 and under. It's an independent not-for-profit, so all funds are reinvested back into the centre. On top of a high level of care, it strikes an impressive learning balance of Indigenous, Anglo-Australian and overseas cultures.",
+      name: "Blake Tindale",
+      detail: "Parent",
+    },
+    {
+      quote:
+        "Our son is in the Green Tree Frog (nursery) room and we couldn't be happier. Having looked at other daycare centres, this one had the most genuinely caring and attentive educators and office staff.",
+      name: "Amanda Salmon",
+      detail: "Nursery (GTF) parent",
+    },
+    {
+      quote:
+        "A wonderful experience — all the educators are warm, friendly and supportive. My daughter has grown so much in confidence, independence and social skills over the years. I'd strongly recommend Munro to any family looking for a caring centre.",
+      name: "Junqiao Du",
+      detail: "Parent",
+    },
+    {
+      quote:
+        "Hard-working and caring staff in a smaller setting. We travel interstate and were so grateful to Munro for accommodating our 12-month-old at short notice.",
+      name: "Bianca Das",
+      detail: "Visiting family",
+    },
+    {
+      quote:
+        "I can't say enough good things about Munro! Our family has moved a lot, so between our two kids we've been in 11 different daycares — we've seen a lot of centres, and Munro is one of our favourites.",
+      name: "Emily Wang",
+      detail: "Parent of two",
     },
   ],
 };
