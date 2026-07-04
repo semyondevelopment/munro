@@ -26,7 +26,7 @@ export function Navbar({ site }: { site: ResolvedSite }) {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-[100] border-b bg-paper transition-shadow duration-500 ease-out-expo",
+        "fixed inset-x-0 top-0 z-[100] border-b bg-paper/90 backdrop-blur-xl transition-shadow duration-500 ease-out-expo",
         scrolled ? "border-navy/10 shadow-soft" : "border-transparent",
       )}
     >

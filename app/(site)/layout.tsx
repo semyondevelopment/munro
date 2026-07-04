@@ -7,19 +7,20 @@ import { getSiteContent } from "@/lib/sanity/get-content";
 
 /**
  * Layout for the public marketing site — adds the nav, footer and conversion
- * chrome. The Sanity Studio at /studio sits outside this group, so it renders
- * without any of the site furniture.
+ * chrome, plus the homepage JSON-LD (sourced from the resolved CMS content, so
+ * structured data stays in sync with edits). The Sanity Studio at /studio sits
+ * outside this group, so it renders without any of the site furniture.
  */
 export default async function SiteLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const { site } = await getSiteContent();
+  const content = await getSiteContent();
   return (
     <>
       <script
         type="application/ld+json"
-        // JSON-LD is trusted, build-time content (no user input).
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd()) }}
+        // JSON-LD is server-rendered, trusted content (no user input).
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd(content)) }}
       />
       <a
         href="#main"
@@ -28,10 +29,10 @@ export default async function SiteLayout({
         Skip to content
       </a>
       <ScrollProgress />
-      <Navbar site={site} />
+      <Navbar site={content.site} />
       <main id="main">{children}</main>
-      <Footer site={site} />
-      <MobileCtaBar site={site} />
+      <Footer site={content.site} />
+      <MobileCtaBar site={content.site} />
     </>
   );
 }
