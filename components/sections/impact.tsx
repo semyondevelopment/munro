@@ -6,6 +6,7 @@ import { Reveal } from "@/components/primitives/reveal";
 import { Button } from "@/components/ui/button";
 import { impact as staticImpact } from "@/lib/content";
 import { img } from "@/lib/images";
+import { site } from "@/lib/site";
 
 type StatItem = { value: string; label: string };
 
@@ -77,7 +78,13 @@ export function Impact({ copy, stats }: ImpactProps) {
             </dl>
 
             <Button asChild size="lg" className="mt-10">
-              <a href="#book">Book a tour</a>
+              <a
+                href={site.owna.waitlistUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Join the Waitlist
+              </a>
             </Button>
           </Reveal>
         </div>

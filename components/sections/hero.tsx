@@ -80,7 +80,13 @@ export function Hero({ highlights, subhead }: HeroProps) {
               className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
               <Button asChild size="xl">
-                <a href={staticHero.primaryCta.href}>{staticHero.primaryCta.label}</a>
+                <a
+                  href={staticHero.primaryCta.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {staticHero.primaryCta.label}
+                </a>
               </Button>
               <Button asChild size="xl" variant="secondary">
                 <a href={staticHero.secondaryCta.href}>

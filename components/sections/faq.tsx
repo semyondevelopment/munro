@@ -11,6 +11,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import { faq as staticFaq } from "@/lib/content";
+import { site } from "@/lib/site";
 
 type FaqItem = { q: string; a: string };
 
@@ -30,11 +31,17 @@ export function Faq({ cmsItems }: { cmsItems?: FaqItem[] }) {
                 {staticFaq.title}
               </h2>
               <p className="mt-6 max-w-sm text-[1.02rem] leading-relaxed text-ink-soft">
-                Still wondering? Call us on the number below, or book a tour and
-                ask in person.
+                Still wondering? Give us a call, or join our waitlist to get
+                started — we&apos;re happy to help.
               </p>
               <Button asChild variant="secondary" className="mt-8">
-                <a href="#book">Book a tour</a>
+                <a
+                  href={site.owna.waitlistUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Join the Waitlist
+                </a>
               </Button>
             </div>
           </Reveal>

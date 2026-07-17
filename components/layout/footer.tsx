@@ -32,22 +32,32 @@ export function Footer({ facebook, instagram, openingHours }: FooterProps) {
               A community-owned, not-for-profit early learning centre in St
               Lucia, Brisbane — where every child belongs.
             </p>
-            <div className="mt-7 flex items-center gap-3">
-              <a
-                href={fbUrl}
-                aria-label="The Munro Centre on Facebook"
-                className="inline-flex size-11 items-center justify-center rounded-pill border border-cream/15 text-cream/70 transition-colors hover:border-cream/35 hover:text-cream"
-              >
-                <FacebookIcon />
-              </a>
-              <a
-                href={igUrl}
-                aria-label="The Munro Centre on Instagram"
-                className="inline-flex size-11 items-center justify-center rounded-pill border border-cream/15 text-cream/70 transition-colors hover:border-cream/35 hover:text-cream"
-              >
-                <InstagramIcon />
-              </a>
-            </div>
+            {(fbUrl || igUrl) && (
+              <div className="mt-7 flex items-center gap-3">
+                {fbUrl && (
+                  <a
+                    href={fbUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="The Munro Centre on Facebook"
+                    className="inline-flex size-11 items-center justify-center rounded-pill border border-cream/15 text-cream/70 transition-colors hover:border-cream/35 hover:text-cream"
+                  >
+                    <FacebookIcon />
+                  </a>
+                )}
+                {igUrl && (
+                  <a
+                    href={igUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="The Munro Centre on Instagram"
+                    className="inline-flex size-11 items-center justify-center rounded-pill border border-cream/15 text-cream/70 transition-colors hover:border-cream/35 hover:text-cream"
+                  >
+                    <InstagramIcon />
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Link columns */}
@@ -115,8 +125,13 @@ export function Footer({ facebook, instagram, openingHours }: FooterProps) {
             <a href={site.contact.phoneHref} className="hover:text-cream/80">
               {site.contact.phone}
             </a>
-            <a href="#book" className="font-medium text-cream/80 hover:text-cream">
-              Book a Tour
+            <a
+              href={site.owna.waitlistUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-cream/80 hover:text-cream"
+            >
+              Join the Waitlist
             </a>
           </div>
         </div>

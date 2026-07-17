@@ -6,8 +6,8 @@ import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /**
- * Sticky conversion bar on mobile — keeps "Call" and "Book a Tour" one tap
- * away at all times. Appears once the user scrolls past the hero.
+ * Sticky conversion bar on mobile — keeps "Call" and "Join the Waitlist" one
+ * tap away at all times. Appears once the user scrolls past the hero.
  */
 export function MobileCtaBar() {
   const [show, setShow] = useState(false);
@@ -39,11 +39,13 @@ export function MobileCtaBar() {
           Call
         </a>
         <a
-          href="#book"
+          href={site.owna.waitlistUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex h-13 flex-[1.6] items-center justify-center gap-2 rounded-pill bg-navy px-4 text-[0.95rem] font-medium text-cream shadow-soft"
         >
           <CalendarHeart className="size-4" strokeWidth={1.8} />
-          Book a Tour
+          Join the Waitlist
         </a>
       </div>
     </div>

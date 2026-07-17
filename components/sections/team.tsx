@@ -48,7 +48,7 @@ export function Team({ copy, points, imageSrc }: TeamProps) {
               ))}
             </ul>
             <Button asChild variant="secondary" size="lg" className="mt-9">
-              <a href="#book">Meet them on a tour</a>
+              <a href="#book">Arrange a visit</a>
             </Button>
           </Reveal>
 

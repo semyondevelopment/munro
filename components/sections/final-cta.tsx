@@ -53,15 +53,34 @@ export function FinalCta() {
           <Reveal delay={0.24}>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Button asChild size="xl" variant="onDark">
-                <a href="#book">Book a Tour</a>
+                <a
+                  href={site.owna.waitlistUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Join the Waitlist
+                </a>
               </Button>
               <Button asChild size="xl" variant="onDarkOutline">
-                <a href={site.contact.phoneHref}>
-                  <Phone className="size-4" strokeWidth={1.8} />
-                  {site.contact.phone}
+                <a
+                  href={site.owna.enrolUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Enrol Now
                 </a>
               </Button>
             </div>
+            <p className="mt-6 flex items-center gap-2 text-cream/75">
+              <Phone className="size-4 text-sage" strokeWidth={1.8} />
+              Prefer to visit first? Call us for a tour —{" "}
+              <a
+                href={site.contact.phoneHref}
+                className="font-medium text-cream underline-offset-4 hover:underline"
+              >
+                {site.contact.phone}
+              </a>
+            </p>
           </Reveal>
         </div>
       </Container>

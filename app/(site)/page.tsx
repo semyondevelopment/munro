@@ -14,7 +14,7 @@ import type { GalleryItem } from "@/components/sections/virtual-tour";
 import { Philosophy } from "@/components/sections/philosophy";
 import { Faq } from "@/components/sections/faq";
 import { FinalCta } from "@/components/sections/final-cta";
-import { BookTour } from "@/components/sections/book-tour";
+import { Enrol } from "@/components/sections/enrol";
 import { SoftDivider } from "@/components/primitives/soft-divider";
 import { getHomePage } from "@/lib/sanity/queries";
 import { sanityImage } from "@/lib/sanity/image";
@@ -116,7 +116,7 @@ export default async function HomePage() {
       <Faq cmsItems={faqItems} />
       <SoftDivider from="cream" to="navy" />
       <FinalCta />
-      <BookTour />
+      <Enrol />
     </>
   );
 }

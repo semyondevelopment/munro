@@ -78,6 +78,9 @@ export const site = {
     name: "OWNA",
     blurb:
       "We use OWNA, a secure digital platform, for everyday communication, daily updates, photos and bookings — so you're always connected to your child's day.",
+    /** Live OWNA intake forms (families apply here). */
+    waitlistUrl: "https://forms.owna.com.au/waitlist.aspx?c=themunrocentreinc",
+    enrolUrl: "https://forms.owna.com.au/enrol.aspx?c=themunrocentreinc",
   },
 
   /** Meals are provided and outsourced through KGF (Kids Gourmet Food). */
@@ -89,8 +92,10 @@ export const site = {
   },
 
   social: {
-    facebook: "https://www.facebook.com/", // CONFIRM
-    instagram: "https://www.instagram.com/", // CONFIRM
+    // Set the real profile URLs in Sanity → Site Settings. Left empty so the
+    // footer hides the icons rather than linking to a bare social homepage.
+    facebook: "",
+    instagram: "",
   },
 
   /** Acknowledgement of Country — Turrbal & Jagera peoples (Meanjin/Brisbane). */

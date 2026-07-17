@@ -79,7 +79,7 @@ export function Rooms({ cmsRooms }: { cmsRooms?: RoomItem[] }) {
                     {room.copy}
                   </p>
                   <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-navy">
-                    Book a tour
+                    Enquire now
                     <ArrowRight
                       className="size-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-1"
                       strokeWidth={1.8}
