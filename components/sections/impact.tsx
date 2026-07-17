@@ -4,6 +4,7 @@ import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
 import { Button } from "@/components/ui/button";
+import { site as siteConfig } from "@/lib/site";
 import type { ImpactContent } from "@/lib/sanity/types";
 import { cn } from "@/lib/utils";
 import { CountUp } from "@/components/primitives/count-up";
@@ -85,7 +86,13 @@ export function Impact({ impact }: { impact: ImpactContent }) {
             </dl>
 
             <Button asChild size="lg" className="mt-10">
-              <a href="#book">Book a tour</a>
+              <a
+                href={siteConfig.owna.waitlistUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Join the Waitlist
+              </a>
             </Button>
           </Reveal>
         </div>

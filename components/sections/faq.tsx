@@ -10,6 +10,7 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
+import { site as siteConfig } from "@/lib/site";
 import type { FaqContent } from "@/lib/sanity/types";
 
 export function Faq({ faq }: { faq: FaqContent }) {
@@ -25,11 +26,17 @@ export function Faq({ faq }: { faq: FaqContent }) {
                 {faq.title}
               </h2>
               <p className="mt-6 max-w-sm text-[1.02rem] leading-relaxed text-ink-soft">
-                Still wondering? Call us on the number below, or book a tour and
-                ask in person.
+                Still wondering? Give us a call, or join our waitlist to get
+                started — we&apos;re happy to help.
               </p>
               <Button asChild variant="secondary" className="mt-8">
-                <a href="#book">Book a tour</a>
+                <a
+                  href={siteConfig.owna.waitlistUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Join the Waitlist
+                </a>
               </Button>
             </div>
           </Reveal>

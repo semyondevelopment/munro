@@ -9,6 +9,7 @@ export function Hero({ hero }: { hero: HeroContent }) {
   const image = hero.image;
   const secondary = hero.imageSecondary;
   const lines = hero.title.split("\n");
+  const primaryExternal = hero.primaryCta.href.startsWith("http");
 
   return (
     <section
@@ -105,7 +106,14 @@ export function Hero({ hero }: { hero: HeroContent }) {
               className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
               <Button asChild size="xl" variant="brand" className="w-full sm:w-auto">
-                <a href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
+                <a
+                  href={hero.primaryCta.href}
+                  {...(primaryExternal
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                >
+                  {hero.primaryCta.label}
+                </a>
               </Button>
               <Button asChild size="xl" variant="secondary" className="w-full sm:w-auto">
                 <a href={hero.secondaryCta.href}>

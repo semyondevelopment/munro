@@ -6,6 +6,7 @@ import { Menu, X, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { nav } from "@/lib/content";
+import { site as siteConfig } from "@/lib/site";
 import type { ResolvedSite } from "@/lib/sanity/types";
 import { cn } from "@/lib/utils";
 
@@ -62,10 +63,14 @@ export function Navbar({ site }: { site: ResolvedSite }) {
           </a>
 
           <Button asChild size="sm" className="sm:hidden">
-            <a href="#book">Book</a>
+            <a href={siteConfig.owna.waitlistUrl} target="_blank" rel="noopener noreferrer">
+              Waitlist
+            </a>
           </Button>
           <Button asChild size="md" className="hidden sm:inline-flex">
-            <a href="#book">Book a Tour</a>
+            <a href={siteConfig.owna.waitlistUrl} target="_blank" rel="noopener noreferrer">
+              Join the Waitlist
+            </a>
           </Button>
 
           {/* Mobile menu */}
@@ -113,11 +118,26 @@ export function Navbar({ site }: { site: ResolvedSite }) {
 
                 <div className="mt-8 flex flex-col gap-3">
                   <Button asChild size="lg" className="w-full">
-                    <a href="#book" onClick={() => setOpen(false)}>
-                      Book a Tour
+                    <a
+                      href={siteConfig.owna.waitlistUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setOpen(false)}
+                    >
+                      Join the Waitlist
                     </a>
                   </Button>
                   <Button asChild size="lg" variant="secondary" className="w-full">
+                    <a
+                      href={siteConfig.owna.enrolUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setOpen(false)}
+                    >
+                      Enrol Now
+                    </a>
+                  </Button>
+                  <Button asChild size="lg" variant="ghost" className="w-full">
                     <a href={site.contact.phoneHref}>
                       <Phone className="size-4" strokeWidth={1.8} />
                       {site.contact.phone}

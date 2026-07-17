@@ -2,6 +2,7 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { Container } from "@/components/primitives/container";
 import { footer } from "@/lib/content";
+import { site as siteConfig } from "@/lib/site";
 import type { ResolvedSite } from "@/lib/sanity/types";
 
 export function Footer({ site }: { site: ResolvedSite }) {
@@ -23,22 +24,32 @@ export function Footer({ site }: { site: ResolvedSite }) {
               A community-owned, not-for-profit early learning centre in St
               Lucia, Brisbane — where every child belongs.
             </p>
-            <div className="mt-7 flex items-center gap-3">
-              <a
-                href={site.social.facebook}
-                aria-label="The Munro Centre on Facebook"
-                className="inline-flex size-11 items-center justify-center rounded-pill border border-cream/15 text-cream/70 transition-colors hover:border-cream/35 hover:text-cream"
-              >
-                <FacebookIcon />
-              </a>
-              <a
-                href={site.social.instagram}
-                aria-label="The Munro Centre on Instagram"
-                className="inline-flex size-11 items-center justify-center rounded-pill border border-cream/15 text-cream/70 transition-colors hover:border-cream/35 hover:text-cream"
-              >
-                <InstagramIcon />
-              </a>
-            </div>
+            {(site.social.facebook || site.social.instagram) && (
+              <div className="mt-7 flex items-center gap-3">
+                {site.social.facebook && (
+                  <a
+                    href={site.social.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="The Munro Centre on Facebook"
+                    className="inline-flex size-11 items-center justify-center rounded-pill border border-cream/15 text-cream/70 transition-colors hover:border-cream/35 hover:text-cream"
+                  >
+                    <FacebookIcon />
+                  </a>
+                )}
+                {site.social.instagram && (
+                  <a
+                    href={site.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="The Munro Centre on Instagram"
+                    className="inline-flex size-11 items-center justify-center rounded-pill border border-cream/15 text-cream/70 transition-colors hover:border-cream/35 hover:text-cream"
+                  >
+                    <InstagramIcon />
+                  </a>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Link columns */}
@@ -106,8 +117,13 @@ export function Footer({ site }: { site: ResolvedSite }) {
             <a href={site.contact.phoneHref} className="hover:text-cream/80">
               {site.contact.phone}
             </a>
-            <a href="#book" className="font-medium text-cream/80 hover:text-cream">
-              Book a Tour
+            <a
+              href={siteConfig.owna.waitlistUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-cream/80 hover:text-cream"
+            >
+              Join the Waitlist
             </a>
           </div>
         </div>

@@ -28,7 +28,7 @@ export const hero = {
   title: "Every Child\nDeserves To Belong",
   subhead:
     "Community-based care and kindergarten in St Lucia, Brisbane — nurturing local families since 1981.",
-  primaryCta: { label: "Book a Tour", href: "#book" },
+  primaryCta: { label: "Join the Waitlist", href: site.owna.waitlistUrl },
   secondaryCta: { label: `Call ${site.contact.phone}`, href: site.contact.phoneHref },
   highlights: ["Caring since 1981", "Kindy Approved", "Not-for-profit"],
   image: "child_nora" as ImageKey,
@@ -330,8 +330,8 @@ export const faq = {
       a: "Our fees depend on your child's room and the days they attend. As an approved provider, eligible families can access the Child Care Subsidy (CCS), which significantly reduces out-of-pocket costs. As a not-for-profit, our fees go straight back into your child's care — we'll walk you through the detail on your tour.",
     },
     {
-      q: "How do I book a tour or enrol?",
-      a: "Tap “Book a Tour”, leave a few details, and we'll be in touch within one business day. Bookings and enrolment are managed through OWNA, our secure digital platform — we'll help you get set up.",
+      q: "How do I join the waitlist, enrol, or book a tour?",
+      a: "Tap “Join the Waitlist” or “Enrol Now” and you'll be taken to OWNA, our secure platform, to complete a short form — it only takes a few minutes. Prefer to visit first? Call us and we'll happily arrange a tour.",
     },
     {
       q: "What rooms and age groups do you have?",
@@ -359,7 +359,7 @@ export const faq = {
 export const finalCta = {
   eyebrow: "Enrolling now",
   title: "We'd Love To Welcome\nYour Family",
-  copy: "Come and feel the difference a community-owned centre makes. Book a tour, or call us — we'd love to show you around.",
+  copy: "Come and feel the difference a community-owned centre makes. Join our waitlist, enrol online, or call us — we'd love to show you around.",
   image: "child_nora" as ImageKey,
 };
 

@@ -15,7 +15,7 @@ import { VirtualTour } from "@/components/sections/virtual-tour";
 import { Philosophy } from "@/components/sections/philosophy";
 import { Faq } from "@/components/sections/faq";
 import { FinalCta } from "@/components/sections/final-cta";
-import { BookTour } from "@/components/sections/book-tour";
+import { Enrol } from "@/components/sections/enrol";
 import { SoftDivider } from "@/components/primitives/soft-divider";
 import { getSiteContent } from "@/lib/sanity/get-content";
 
@@ -45,7 +45,7 @@ export default async function HomePage() {
       <Faq faq={c.faq} />
       <SoftDivider from="cream" to="navy" />
       <FinalCta finalCta={c.finalCta} site={c.site} />
-      <BookTour rooms={c.rooms} site={c.site} />
+      <Enrol site={c.site} />
     </>
   );
 }

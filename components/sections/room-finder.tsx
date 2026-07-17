@@ -147,7 +147,7 @@ export function RoomFinder({ rooms, roomAgeMonths, roomFinder }: { rooms: RoomsC
 
                   <Button asChild className="mt-5" variant="brand">
                     <a href="#book">
-                      Book a tour for {best.name}
+                      Enquire about {best.name}
                       <ArrowRight className="size-4" strokeWidth={1.9} />
                     </a>
                   </Button>
@@ -159,7 +159,7 @@ export function RoomFinder({ rooms, roomAgeMonths, roomFinder }: { rooms: RoomsC
                   We care for children from 6 weeks to kindergarten age. Move the
                   slider, or{" "}
                   <a href="#book" className="font-medium text-navy underline-offset-4 hover:underline">
-                    book a tour
+                    enquire
                   </a>{" "}
                   and we&apos;ll help you find the right fit.
                 </p>
