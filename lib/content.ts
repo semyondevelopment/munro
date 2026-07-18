@@ -124,7 +124,7 @@ export const rooms = {
       name: "Kookaburra",
       tag: "Kindy Approved",
       age: "3.5 years – Prep age",
-      copy: "Our Kindy Approved kindergarten room — preparing confident, capable learners for a smooth start to school.",
+      copy: "Our Kindy Approved kindergarten room — preparing confident, capable learners for a smooth start to school, with hands-on kindy science classes every Tuesday.",
       image: "children_writing" as ImageKey,
     },
   ],
@@ -343,7 +343,7 @@ export const faq = {
     },
     {
       q: "Do you offer a kindergarten program?",
-      a: "Yes. Our Kookaburra room runs a Kindy Approved kindergarten program led by a qualified early childhood teacher, preparing children for a confident transition to school.",
+      a: "Yes. Our Kookaburra room runs a Kindy Approved kindergarten program led by a qualified early childhood teacher, preparing children for a confident transition to school — including hands-on kindy science classes every Tuesday.",
     },
     {
       q: "What makes a not-for-profit, community-based centre different?",
