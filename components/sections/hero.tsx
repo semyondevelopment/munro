@@ -3,6 +3,7 @@ import { Phone, Check, Sparkles, Sparkle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/primitives/container";
 import { Reveal } from "@/components/primitives/reveal";
+import { Parallax } from "@/components/primitives/parallax";
 import type { HeroContent } from "@/lib/sanity/types";
 
 export function Hero({ hero }: { hero: HeroContent }) {
@@ -16,23 +17,28 @@ export function Hero({ hero }: { hero: HeroContent }) {
       id="top"
       className="relative overflow-hidden bg-cream pb-24 pt-28 sm:pb-28 lg:pb-32 lg:pt-36"
     >
-      {/* Atmospheric brand washes — layered for depth */}
-      <div
+      {/* Atmospheric brand washes — layered, and drifting at different rates
+          on scroll for a soft sense of depth. */}
+      <Parallax
         aria-hidden
+        speed={0.12}
         className="pointer-events-none absolute -right-32 -top-24 size-[36rem] rounded-full bg-sage-100 blur-3xl"
       />
-      <div
+      <Parallax
         aria-hidden
+        speed={0.08}
         className="pointer-events-none absolute -bottom-40 -left-24 size-[28rem] rounded-full bg-terracotta-100/60 blur-3xl"
       />
+      {/* Centre wash positions itself with a transform, so leave it static. */}
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/3 top-1/2 size-[24rem] -translate-x-1/2 -translate-y-1/3 rounded-full bg-brand-blue-100/40 blur-3xl"
       />
 
       {/* Soft dot-grid texture behind the copy, fading towards the centre */}
-      <div
+      <Parallax
         aria-hidden
+        speed={0.04}
         className="dot-grid pointer-events-none absolute inset-y-0 left-0 hidden w-[52%] opacity-70 [mask-image:radial-gradient(68%_62%_at_32%_40%,black,transparent)] sm:block"
       />
 
@@ -141,13 +147,18 @@ export function Hero({ hero }: { hero: HeroContent }) {
           <div className="relative">
             <Reveal className="relative mx-auto w-full max-w-md lg:ml-auto lg:max-w-none">
               {/* Tilted colour tile + hand-drawn ring — grounding depth layers
-                  that peek out from behind the photo. Purely decorative. */}
-              <div
+                  that peek out from behind the photo. They drift gently on
+                  scroll (opposite ways) so the collage feels layered. Purely
+                  decorative. */}
+              <Parallax
                 aria-hidden
-                className="absolute -inset-2 -rotate-2 rounded-[2rem] bg-brand-yellow-200/70 sm:-inset-3 lg:rounded-[2.5rem]"
+                speed={0.06}
+                rotate={-2}
+                className="absolute -inset-2 rounded-[2rem] bg-brand-yellow-200/70 sm:-inset-3 lg:rounded-[2.5rem]"
               />
-              <div
+              <Parallax
                 aria-hidden
+                speed={-0.05}
                 className="absolute -left-6 -top-6 size-12 rounded-full border-[3px] border-dashed border-brand-blue/50"
               />
 
