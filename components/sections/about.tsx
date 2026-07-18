@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
+import { Parallax } from "@/components/primitives/parallax";
 import { Atmosphere } from "@/components/primitives/atmosphere";
 import type { AboutContent } from "@/lib/sanity/types";
 import { brandTile } from "@/lib/palette";
@@ -29,13 +30,16 @@ export function About({ about }: { about: AboutContent }) {
             return (
               <Reveal as="li" key={pillar.key} delay={i * 0.08}>
                 <div className="img-zoom relative aspect-[4/5] overflow-hidden rounded-[var(--radius)] bg-sand shadow-soft">
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    sizes="(min-width:768px) 30vw, 90vw"
-                    className="object-cover"
-                  />
+                  {/* Oversized wrapper so the gentle drift never reveals an edge. */}
+                  <Parallax range={16} className="absolute inset-x-0 -inset-y-[7%]">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      sizes="(min-width:768px) 30vw, 90vw"
+                      className="object-cover"
+                    />
+                  </Parallax>
                 </div>
                 <div className="mt-6">
                   <span

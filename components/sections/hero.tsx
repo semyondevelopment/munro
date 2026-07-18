@@ -21,12 +21,12 @@ export function Hero({ hero }: { hero: HeroContent }) {
           on scroll for a soft sense of depth. */}
       <Parallax
         aria-hidden
-        speed={0.12}
+        range={56}
         className="pointer-events-none absolute -right-32 -top-24 size-[36rem] rounded-full bg-sage-100 blur-3xl"
       />
       <Parallax
         aria-hidden
-        speed={0.08}
+        range={40}
         className="pointer-events-none absolute -bottom-40 -left-24 size-[28rem] rounded-full bg-terracotta-100/60 blur-3xl"
       />
       {/* Centre wash positions itself with a transform, so leave it static. */}
@@ -38,7 +38,7 @@ export function Hero({ hero }: { hero: HeroContent }) {
       {/* Soft dot-grid texture behind the copy, fading towards the centre */}
       <Parallax
         aria-hidden
-        speed={0.04}
+        range={22}
         className="dot-grid pointer-events-none absolute inset-y-0 left-0 hidden w-[52%] opacity-70 [mask-image:radial-gradient(68%_62%_at_32%_40%,black,transparent)] sm:block"
       />
 
@@ -152,13 +152,13 @@ export function Hero({ hero }: { hero: HeroContent }) {
                   decorative. */}
               <Parallax
                 aria-hidden
-                speed={0.06}
+                range={38}
                 rotate={-2}
                 className="absolute -inset-2 rounded-[2rem] bg-brand-yellow-200/70 sm:-inset-3 lg:rounded-[2.5rem]"
               />
               <Parallax
                 aria-hidden
-                speed={-0.05}
+                range={-30}
                 className="absolute -left-6 -top-6 size-12 rounded-full border-[3px] border-dashed border-brand-blue/50"
               />
 

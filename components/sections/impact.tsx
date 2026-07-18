@@ -3,6 +3,7 @@ import { Check } from "lucide-react";
 import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
+import { Parallax } from "@/components/primitives/parallax";
 import { Button } from "@/components/ui/button";
 import { site as siteConfig } from "@/lib/site";
 import type { ImpactContent } from "@/lib/sanity/types";
@@ -18,13 +19,16 @@ export function Impact({ impact }: { impact: ImpactContent }) {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <div className="img-zoom relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-sand shadow-soft">
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                sizes="(min-width:1024px) 45vw, 90vw"
-                className="object-cover"
-              />
+              {/* Oversized wrapper so the gentle drift never reveals an edge. */}
+              <Parallax range={22} className="absolute inset-x-0 -inset-y-[7%]">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(min-width:1024px) 45vw, 90vw"
+                  className="object-cover"
+                />
+              </Parallax>
             </div>
           </Reveal>
 

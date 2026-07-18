@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/primitives/container";
 import { Eyebrow } from "@/components/primitives/eyebrow";
 import { Reveal } from "@/components/primitives/reveal";
+import { Parallax } from "@/components/primitives/parallax";
 import { site as siteConfig } from "@/lib/site";
 import type { FinalCtaContent, ResolvedSite } from "@/lib/sanity/types";
 
@@ -16,13 +17,16 @@ export function FinalCta({ finalCta, site }: { finalCta: FinalCtaContent; site: 
 
       {/* Backdrop */}
       <div className="absolute inset-0">
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          sizes="100vw"
-          className="object-cover object-center"
-        />
+        {/* Oversized so the slow drift never exposes an edge; gradients stay put. */}
+        <Parallax range={26} className="absolute inset-x-0 -inset-y-[8%]">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </Parallax>
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/70 to-navy/55" />
         <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/40 to-navy/20" />
       </div>

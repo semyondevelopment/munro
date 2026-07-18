@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Parallax } from "./parallax";
 
 type AtmosphereTone = "sage" | "terracotta" | "blue" | "yellow" | "green" | "red";
 
@@ -34,14 +35,17 @@ export function Atmosphere({ tone = "sage", flip = false, className }: Atmospher
       aria-hidden
       className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
     >
-      <div
+      {/* The two washes drift opposite ways on scroll for a soft, layered depth. */}
+      <Parallax
+        range={34}
         className={cn(
           "absolute size-[40rem] rounded-full blur-[110px]",
           flip ? "-left-48 -top-44" : "-right-48 -top-44",
           primary,
         )}
       />
-      <div
+      <Parallax
+        range={-26}
         className={cn(
           "absolute size-[32rem] rounded-full blur-[110px]",
           flip ? "-right-40 -bottom-48" : "-left-40 -bottom-48",
