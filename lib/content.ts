@@ -503,7 +503,7 @@ export const daySchedule = {
     { time: "12:00pm", title: "Lunch together", copy: "A nutritious cooked lunch by KGF, shared around the table." },
     { time: "1:00pm", title: "Rest & quiet time", copy: "Sleep or restful play, tailored to each child's needs." },
     { time: "3:00pm", title: "Afternoon adventures", copy: "Afternoon tea, more play and projects that follow the children's interests." },
-    { time: "6:00pm", title: "Happy goodbyes", copy: "Daily highlights and photos shared with you through the OWNA app." },
+    { time: "5:30pm", title: "Happy goodbyes", copy: "Daily highlights and photos shared with you through the OWNA app." },
   ],
 };
 

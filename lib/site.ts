@@ -49,12 +49,11 @@ export const site = {
     longitude: 153.0137,
   },
 
-  /** CONFIRM exact hours before launch (typical long-day-care hours shown). */
   hours: {
     opens: "07:30",
-    closes: "18:00",
+    closes: "17:30",
     days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    display: "Monday – Friday, 7:30am – 6:00pm",
+    display: "Monday – Friday, 7:30am – 5:30pm",
   },
 
   /** Suburbs we draw families from — fuels areaServed in LocalBusiness schema. */

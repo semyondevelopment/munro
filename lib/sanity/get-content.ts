@@ -461,14 +461,16 @@ function buildContent(data: RawData | null): SiteContent {
 /**
  * Fetch + resolve the site content. Cached per request (React `cache`) so the
  * page and the layout share a single fetch. Tagged for on-demand revalidation
- * and time-revalidated (60s) as a safety net if the webhook isn't configured.
+ * via the publish webhook (POST /api/revalidate — instant, and the reliable
+ * path), with a 30s time-based refresh as a safety net if the webhook isn't
+ * configured yet.
  */
 export const getSiteContent = cache(async (): Promise<SiteContent> => {
   if (!isSanityConfigured) return buildContent(null);
   try {
     const data = await client
       .withConfig({ useCdn: false })
-      .fetch<RawData>(CONTENT_QUERY, {}, { next: { tags: [CONTENT_TAG], revalidate: 60 } });
+      .fetch<RawData>(CONTENT_QUERY, {}, { next: { tags: [CONTENT_TAG], revalidate: 30 } });
     return buildContent(data);
   } catch (err) {
     console.error("[sanity] content fetch failed; serving bundled content.", err);

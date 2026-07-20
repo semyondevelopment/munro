@@ -16,6 +16,7 @@ import { Philosophy } from "@/components/sections/philosophy";
 import { Faq } from "@/components/sections/faq";
 import { FinalCta } from "@/components/sections/final-cta";
 import { Enrol } from "@/components/sections/enrol";
+import { Visit } from "@/components/sections/visit";
 import { SoftDivider } from "@/components/primitives/soft-divider";
 import { getSiteContent } from "@/lib/sanity/get-content";
 
@@ -43,7 +44,9 @@ export default async function HomePage() {
       <Philosophy philosophy={c.philosophy} />
       <SoftDivider from="navy" to="cream" />
       <Faq faq={c.faq} />
-      <SoftDivider from="cream" to="navy" />
+      <SoftDivider from="cream" to="sand" />
+      <Visit site={c.site} />
+      <SoftDivider from="sand" to="navy" />
       <FinalCta finalCta={c.finalCta} site={c.site} />
       <Enrol site={c.site} />
     </>
