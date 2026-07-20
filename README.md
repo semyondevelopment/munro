@@ -56,7 +56,7 @@ public/images/         The centre's own photography
 
 Two ways to edit, and they work together:
 
-- **Sanity CMS (no code) — the everyday way.** Staff log in at **`/studio`** and edit all copy, images, rooms, educators, testimonials, FAQs, fees and contact details; published changes appear on the live site automatically. One-time setup (create the project + add Vercel env vars) is in **`docs/SANITY_SETUP.md`**; the plain-English staff guide is **`docs/EDITING_GUIDE.md`**.
+- **Sanity CMS (no code) — the everyday way.** Staff log in at **`/studio`** and edit all copy, images, rooms, educators, testimonials, FAQs, fees and contact details; published changes appear on the live site automatically. One-time setup (create the project + add Vercel env vars) is in **`docs/SANITY_SETUP.md`**; the plain-English staff guide is **`docs/EDITING_GUIDE.md`**. There's also a friendly, illustrated how-to page built into the site at **`/guide`** (unlisted — `noindex`, not in the nav or sitemap) that staff can follow along with, plus a ready-to-run training script for onboarding the team in **`docs/CMS_TRAINING_PRESENTATION.md`**.
 - **Code (defaults & fallback).** Until Sanity is connected — and as the built-in fallback for anything not yet entered there — content comes from `lib/content.ts` (copy), `lib/site.ts` (NAP, hours, OWNA, KGF) and `lib/images.ts` (photo slots → `/public/images`). Because of this fallback the site never renders blank, and deploying before Sanity is set up is always safe.
 
 ## SEO — built in (on-page / technical)

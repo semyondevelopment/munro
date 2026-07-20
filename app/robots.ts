@@ -9,7 +9,8 @@ export default function robots(): MetadataRoute.Robots {
         // PerplexityBot, ClaudeBot…) — except the editing UI and API routes.
         userAgent: "*",
         allow: "/",
-        disallow: ["/studio/", "/api/"],
+        // /guide is an unlisted staff how-to page; keep it out of search.
+        disallow: ["/studio/", "/api/", "/guide"],
       },
     ],
     sitemap: `${site.url}/sitemap.xml`,
