@@ -44,7 +44,7 @@ test("silently accepts and drops honeypot (bot) submissions", async () => {
 });
 
 test("a valid submission with no email provider asks the family to call", async () => {
-  delete process.env.RESEND_API_KEY; // ensure the "not configured" path
+  delete process.env.WEB3FORMS_ACCESS_KEY; // ensure the "not configured" path
   const state = await bookTour(
     initialTourState,
     form({ parentName: "Sam Lee", email: "sam@example.com", phone: "0400 123 456" }),
